@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class CredentialController extends GetxController {
+class CredentialsController extends GetxController {
   late bool isEmailValid;
   late bool isPasswordValid;
   late bool isPasswordHidden;
@@ -29,11 +29,6 @@ class CredentialController extends GetxController {
 
   void togglePasswordVisibility() {
     isPasswordHidden = !isPasswordHidden;
-    if (isPasswordHidden) {
-      print("3131: true");
-    } else {
-      print("3131: false");
-    }
     update();
   }
 }

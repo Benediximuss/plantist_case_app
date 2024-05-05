@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/screens/templates/credential_controller.dart';
+import 'package:plantist_case_app/screens/templates/credentials_controller.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 
-class CredentialPageTemplate extends StatelessWidget {
-  CredentialPageTemplate({
+class CredentialsPageTemplate extends StatelessWidget {
+  CredentialsPageTemplate({
     super.key,
     required this.title,
     required this.buttonText,
@@ -16,7 +16,7 @@ class CredentialPageTemplate extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
 
-  final CredentialController _controller = Get.find();
+  final CredentialsController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class CredentialPageTemplate extends StatelessWidget {
                   // focusNode: _usernameFocus,
                   decoration: InputDecoration(
                     hintText: 'E-mail',
-                    suffixIcon: GetBuilder<CredentialController>(
+                    suffixIcon: GetBuilder<CredentialsController>(
                       builder: (controller) => controller.isEmailValid
                           ? const Icon(Icons.check_circle)
                           : const SizedBox.shrink(),
@@ -68,7 +68,7 @@ class CredentialPageTemplate extends StatelessWidget {
                 ),
                 //
                 const SizedBox(height: 30),
-                GetBuilder<CredentialController>(
+                GetBuilder<CredentialsController>(
                   builder: (controller) => TextFormField(
                     keyboardType: TextInputType.visiblePassword,
                     style: TextStyles.inputText(),
@@ -97,7 +97,7 @@ class CredentialPageTemplate extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: GetBuilder<CredentialController>(
+                      child: GetBuilder<CredentialsController>(
                         builder: (controller) => DynamicButton(
                           text: buttonText,
                           enabled: controller.isEmailValid &&
