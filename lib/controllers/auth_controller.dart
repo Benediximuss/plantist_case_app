@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:plantist_case_app/utils/notification_utils.dart';
 
 class AuthController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -10,21 +11,28 @@ class AuthController extends GetxController {
     required String email,
     required String password,
   }) async {
-    print("3131: signup - $email, $password");
-    // try {
-    //   await _auth.createUserWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    // } on FirebaseAuthException catch (e) {
-    //   Get.snackbar(
-    //     "Error signing up",
-    //     e.message.toString(),
-    //     snackPosition: SnackPosition.BOTTOM,
-    //   );
-    // } catch (e) {
-    //   print(e.toString());
-    // }
+    try {
+      // await _auth.createUserWithEmailAndPassword(
+      //   email: email,
+      //   password: password,
+      // );
+      await Future.delayed(const Duration(seconds: 1));
+
+    } on FirebaseAuthException catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing up",
+        message: e.message.toString(),
+      );
+      rethrow;
+    } catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing up",
+        message: "An error occurred, please try again",
+      );
+
+      print(e.toString());
+      rethrow;
+    }
   }
 
   Future<void> signIn({
@@ -36,14 +44,41 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-      if (user.user != null) inside = true;
+
+      inside = _auth.currentUser != null;
     } on FirebaseAuthException catch (e) {
-      Get.snackbar(
-        "Error signing in",
-        e.message.toString(),
-        snackPosition: SnackPosition.BOTTOM,
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing in",
+        message: e.message.toString(),
+      );
+      rethrow;
+    } catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing in",
+        message: "An error occurred, please try again",
+      );
+
+      print(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+      inside = _auth.currentUser != null;
+      // Get.find<UserController>().clear();
+    } on FirebaseAuthException catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing out",
+        message: e.message.toString(),
       );
     } catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error signing out",
+        message: "An error occurred, please try again",
+      );
+
       print(e.toString());
     }
   }

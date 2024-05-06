@@ -15,8 +15,6 @@ class SignInScreen extends StatelessWidget {
       title: 'Sign in',
       buttonText: 'Sign In',
       onPressedSubmit: _authController.signIn,
-      // onPressedSubmit: ({required email, required password}) =>
-      //     _authController.signIn(email: email, password: password),
       onSuccessful: () => Get.offAndToNamed(AppRoutes.homeScreen),
     );
   }

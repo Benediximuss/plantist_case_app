@@ -1,46 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CredentialsController extends GetxController {
-  late bool isEmailValid;
-  late bool isPasswordValid;
-  late bool isPasswordHidden;
-  late bool isLoading;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  final Rx<bool> _isEmailValid = Rx<bool>(false);
+  final Rx<bool> _isPasswordValid = Rx<bool>(false);
+  final Rx<bool> _isPasswordHidden = Rx<bool>(true);
+  final Rx<bool> _isLoading = Rx<bool>(false);
+
+  bool get isEmailValid => _isEmailValid.value;
+  bool get isPasswordValid => _isPasswordValid.value;
+  bool get isPasswordHidden => _isPasswordHidden.value;
+  bool get isLoading => _isLoading.value;
 
   @override
   void onInit() {
     super.onInit();
-    initValues();
+    emailController.text = 'ugur@gma.com';
+    passwordController.text = '123456';
+    _isPasswordValid.value = true;
+    _isEmailValid.value = true;
   }
 
-  void initValues() {
-    isEmailValid = false;
-    isPasswordValid = false;
-    isPasswordHidden = true;
-    isLoading = false;
+  
+
+  void validateEmail() {
+    _isEmailValid.value = GetUtils.isEmail(emailController.text);
   }
 
-  void validateEmail(String value) {
-    isEmailValid = GetUtils.isEmail(value);
-    update();
-  }
-
-  void validatePassword(String value) {
-    isPasswordValid = value.length >= 6;
-    update();
+  void validatePassword() {
+    _isPasswordValid.value = passwordController.text.length >= 6;
   }
 
   void togglePasswordVisibility() {
-    isPasswordHidden = !isPasswordHidden;
-    update();
+    _isPasswordHidden.value = !_isPasswordHidden.value;
   }
 
   void enableLoader() {
-    isLoading = true;
-    update();
+    _isLoading.value = true;
   }
 
   void disableLoader() {
-    isLoading = false;
-    update();
+    _isLoading.value = false;
   }
 }

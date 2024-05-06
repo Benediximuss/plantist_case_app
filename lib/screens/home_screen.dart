@@ -1,4 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/services/firedb.dart';
+import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,12 +12,112 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(
-        child: Text('WELCOME BACK'),
+      // appBar: AppBar(
+      //   leadingWidth: 70,
+      //   toolbarHeight: 100,
+      //   title: Text(
+      //     'Plantist',
+      //     style: TextStyles.titleTextBig(),
+      //   ),
+      //   automaticallyImplyLeading: false,
+      //   actions: [
+      //     IconButton(
+      //       icon: Icon(
+      //         CupertinoIcons.search,
+      //         weight: 0.7,
+      //         size: TextStyles.titleTextBig().fontSize! * 1.15,
+      //       ),
+      //       onPressed: () {
+      //         print('Search button pressed');
+      //       },
+      //     ),
+      //     const SizedBox(width: 10),
+      //     IconButton(
+      //       icon: Icon(
+      //         Icons.logout_rounded,
+      //         weight: 0.1,
+      //         size: TextStyles.titleTextBig().fontSize! * 1.15,
+      //       ),
+      //       onPressed: () {
+      //         // Implement logout functionality here
+      //         print('Logout button pressed');
+      //       },
+      //     ),
+      //   ],
+      // ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Plantist',
+                      style: TextStyles.titleTextBig(),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            CupertinoIcons.search,
+                            weight: 0.7,
+                            size: TextStyles.titleTextBig().fontSize!,
+                          ),
+                          onPressed: () {
+                            print('Search button pressed');
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        IconButton(
+                          icon: Icon(
+                            Icons.logout_rounded,
+                            weight: 0.1,
+                            size: TextStyles.titleTextBig().fontSize!,
+                          ),
+                          onPressed: () {
+                            // Implement logout functionality here
+                            print('Logout button pressed');
+                            Get.find<AuthController>().signOut();
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      'WELCOME BACK',
+                      style: TextStyles.titleTextBig(),
+                    ),
+                    const SizedBox(height: 10),
+                    Icon(
+                      Icons.check_circle,
+                      color: Get.find<AuthController>().inside
+                          ? Colors.green
+                          : Colors.grey,
+                      size: 150,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                CustomIconButton(
+                  text: 'POST DATA',
+                  onPressed: _postLogic,
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
+  }
+
+  void _postLogic() {
+    Firedb.postNewItem();
   }
 }

@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/asset_manager.dart';
+import 'package:plantist_case_app/utils/notification_utils.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:simple_shadow/simple_shadow.dart';
@@ -56,7 +58,8 @@ class WelcomeScreen extends StatelessWidget {
                     Expanded(
                       child: CustomIconButton(
                         text: 'Sign in with email',
-                        icon: Icons.mail_rounded,
+                        // icon: Icons.mail_rounded,
+                        icon: CupertinoIcons.mail_solid,
                         onPressed: () => _signInPressed(context),
                         lightMode: true,
                       ),

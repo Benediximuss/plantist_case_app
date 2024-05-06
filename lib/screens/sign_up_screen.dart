@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/screens/templates/credentials_page_template.dart';
+import 'package:plantist_case_app/utils/notification_utils.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -15,9 +16,14 @@ class SignUpScreen extends StatelessWidget {
       title: 'Sign up',
       buttonText: 'Create Account',
       onPressedSubmit: _authController.signUp,
-      // onPressedSubmit: ({required email, required password}) =>
-      //     _authController.signUp(email: email, password: password),
-      onSuccessful: () => Get.offAndToNamed(AppRoutes.signInScreen),
+      onSuccessful: () {
+        NotificationUtils.showCustomSnackbar(
+          title: 'Success',
+          message: 'Sign up Successful!',
+        );
+
+        Get.until((route) => Get.currentRoute == AppRoutes.welcomeScreen);
+      },
     );
   }
 }
