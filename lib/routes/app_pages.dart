@@ -3,7 +3,7 @@ import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/screens/home_screen.dart';
 import 'package:plantist_case_app/screens/sign_in_screen.dart';
 import 'package:plantist_case_app/screens/sign_up_screen.dart';
-import 'package:plantist_case_app/screens/templates/credentials_binding.dart';
+import 'package:plantist_case_app/controllers/bindings/credentials_binding.dart';
 import 'package:plantist_case_app/screens/welcome_screen.dart';
 
 class AppPages {
@@ -16,12 +16,12 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.signUpScreen,
-      page: () => const SignUpScreen(),
+      page: () => SignUpScreen(),
       binding: CredentialsBinding(),
     ),
     GetPage(
       name: AppRoutes.signInScreen,
-      page: () => const SignInScreen(),
+      page: () => SignInScreen(),
       binding: CredentialsBinding(),
     ),
     GetPage(

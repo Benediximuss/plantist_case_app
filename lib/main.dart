@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantist_case_app/controllers/bindings/auth_binding.dart';
 import 'package:plantist_case_app/routes/app_pages.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   AppPages.initial = AppRoutes.welcomeScreen;
 
@@ -26,7 +27,7 @@ class MainApp extends StatelessWidget {
         colorScheme: ColorSchemes.mainTheme(),
       ),
       initialRoute: AppPages.initial,
-      // initialBinding: UpcomingMovieBinding(),
+      initialBinding: AuthBinding(),
       getPages: AppPages.pages,
 
       // initialRoute: AppRouter.initialRoute,
