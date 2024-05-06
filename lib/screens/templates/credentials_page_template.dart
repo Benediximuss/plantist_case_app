@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/credentials_controller.dart';
-import 'package:plantist_case_app/utils/notification_utils.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';

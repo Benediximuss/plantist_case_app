@@ -40,7 +40,7 @@ class AuthController extends GetxController {
     required String password,
   }) async {
     try {
-      final UserCredential user = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
