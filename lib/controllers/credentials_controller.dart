@@ -17,11 +17,11 @@ class CredentialsController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     emailController.text = 'ugur@gma.com';
     passwordController.text = '123456';
     _isPasswordValid.value = true;
     _isEmailValid.value = true;
+    super.onInit();
   }
 
   

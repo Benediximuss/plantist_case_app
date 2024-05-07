@@ -4,12 +4,17 @@ import 'package:plantist_case_app/screens/home_screen.dart';
 import 'package:plantist_case_app/screens/sign_in_screen.dart';
 import 'package:plantist_case_app/screens/sign_up_screen.dart';
 import 'package:plantist_case_app/controllers/bindings/credentials_binding.dart';
+import 'package:plantist_case_app/screens/splash_screen.dart';
 import 'package:plantist_case_app/screens/welcome_screen.dart';
 
 class AppPages {
   static late final String initial;
 
   static final List<GetPage> pages = [
+    GetPage(
+      name: AppRoutes.splashScreen,
+      page: () => const SplashScreen(),
+    ),
     GetPage(
       name: AppRoutes.welcomeScreen,
       page: () => const WelcomeScreen(),

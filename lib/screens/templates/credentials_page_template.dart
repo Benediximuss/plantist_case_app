@@ -115,7 +115,7 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                                   controller.isPasswordValid,
                               onPressed: () {
                                 FocusManager.instance.primaryFocus?.unfocus();
-                                onSubmitLogic();
+                                _onSubmitLogic();
                               },
                             ),
                           ),
@@ -145,14 +145,14 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
     );
   }
 
-  void onSubmitLogic() {
+  void _onSubmitLogic() {
     controller.enableLoader();
 
     onPressedSubmit(
       email: controller.emailController.text,
       password: controller.passwordController.text,
-    ).then((_) {
-      onSuccessful();
-    }).whenComplete(() => controller.disableLoader());
+    )
+        .then((_) => onSuccessful())
+        .whenComplete(() => controller.disableLoader());
   }
 }

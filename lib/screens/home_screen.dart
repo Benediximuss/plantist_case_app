@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/services/firedb.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
@@ -12,39 +13,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leadingWidth: 70,
-      //   toolbarHeight: 100,
-      //   title: Text(
-      //     'Plantist',
-      //     style: TextStyles.titleTextBig(),
-      //   ),
-      //   automaticallyImplyLeading: false,
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(
-      //         CupertinoIcons.search,
-      //         weight: 0.7,
-      //         size: TextStyles.titleTextBig().fontSize! * 1.15,
-      //       ),
-      //       onPressed: () {
-      //         print('Search button pressed');
-      //       },
-      //     ),
-      //     const SizedBox(width: 10),
-      //     IconButton(
-      //       icon: Icon(
-      //         Icons.logout_rounded,
-      //         weight: 0.1,
-      //         size: TextStyles.titleTextBig().fontSize! * 1.15,
-      //       ),
-      //       onPressed: () {
-      //         // Implement logout functionality here
-      //         print('Logout button pressed');
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
@@ -78,11 +46,7 @@ class HomeScreen extends StatelessWidget {
                             weight: 0.1,
                             size: TextStyles.titleTextBig().fontSize!,
                           ),
-                          onPressed: () {
-                            // Implement logout functionality here
-                            print('Logout button pressed');
-                            Get.find<AuthController>().signOut();
-                          },
+                          onPressed: () => _onLogOutPressed(),
                         ),
                       ],
                     ),
@@ -97,7 +61,7 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     Icon(
                       Icons.check_circle,
-                      color: Get.find<AuthController>().inside
+                      color: Get.find<AuthController>().activeUser != null
                           ? Colors.green
                           : Colors.grey,
                       size: 150,
@@ -115,6 +79,12 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onLogOutPressed() {
+    Get.find<AuthController>()
+        .signOut()
+        .then((_) => Get.offAllNamed(AppRoutes.welcomeScreen));
   }
 
   void _postLogic() {

@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                         text: 'Sign in with email',
                         // icon: Icons.mail_rounded,
                         icon: CupertinoIcons.mail_solid,
-                        onPressed: () => _signInPressed(context),
+                        onPressed: () => _onSignInPressed(),
                         lightMode: true,
                       ),
                     ),
@@ -79,7 +79,7 @@ class WelcomeScreen extends StatelessWidget {
                       width: 5,
                     ),
                     GestureDetector(
-                      onTap: () => _signUpPressed(context),
+                      onTap: () => _onSignUpPressed(),
                       child: Text(
                         'Sign Up',
                         style: TextStyles.captionTextHighlighted(),
@@ -95,11 +95,11 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 
-  void _signInPressed(BuildContext context) {
+  void _onSignInPressed() {
     Get.toNamed(AppRoutes.signInScreen);
   }
 
-  void _signUpPressed(BuildContext context) {
+  void _onSignUpPressed() {
     Get.toNamed(AppRoutes.signUpScreen);
   }
 }

@@ -10,7 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  AppPages.initial = AppRoutes.welcomeScreen;
+  AppPages.initial = AppRoutes.splashScreen;
 
   runApp(const MainApp());
 }
@@ -29,9 +29,6 @@ class MainApp extends StatelessWidget {
       initialRoute: AppPages.initial,
       initialBinding: AuthBinding(),
       getPages: AppPages.pages,
-
-      // initialRoute: AppRouter.initialRoute,
-      // onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }
