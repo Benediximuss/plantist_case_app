@@ -1,37 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 
 class ReminderCard extends StatelessWidget {
   final ReminderModel reminder;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const ReminderCard({
     super.key,
     required this.reminder,
+    required this.onEdit,
+    required this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card.filled(
-      // elevation: 1,
-      // color: Colors.green[50],
-      
-
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Padding(
-        padding: const EdgeInsets.all(0.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+    return Container(
+      margin: const EdgeInsets.only(top: 10, left: 15),
+      child: Slidable(
+        closeOnScroll: true,
+        endActionPane: ActionPane(
+          motion: const ScrollMotion(),
           children: [
-            Icon(
-              CupertinoIcons.circle,
-              color: Colors.amber[600],
+            SlidableAction(
+              onPressed: (_) => onEdit(),
+              backgroundColor: const Color(0xffb7b7b9),
+              foregroundColor: Colors.white,
+              label: 'Edit',
             ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Container(
-                // color: Colors.green[50],
+            SlidableAction(
+              onPressed: (_) => onDelete(),
+              backgroundColor: const Color(0xFFf44837),
+              foregroundColor: Colors.white,
+              label: 'Delete',
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(0.5),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  // color: Color(0xFFd97c7d), // HIGH
+                  color: Color(0xFFe69340), // MEDIUM
+                  // color: Color(0xFF2a73e6), // LOW
+                  // color: Color(0xFFb7b7b9), // NONE
+                ),
+                child: Icon(
+                  CupertinoIcons.circle_filled,
+                  color: Colors.white.withOpacity(0.9),
+                  size: 25,
+                ),
+              ),
+              const SizedBox(width: 15),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -39,11 +68,12 @@ class ReminderCard extends StatelessWidget {
                       'Evening zoom call',
                       style: TextStyles.defaultText(),
                     ),
+                    const SizedBox(height: 5),
                     Text(
                       'Reminders',
                       style: TextStyles.defaultTextSecondary(),
                     ),
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         IconText(
@@ -51,7 +81,7 @@ class ReminderCard extends StatelessWidget {
                           icon: CupertinoIcons.calendar,
                           textStyle: TextStyles.defaultTextSecondary(),
                         ),
-                        const SizedBox(width: 10),
+                        const SizedBox(width: 15),
                         IconText(
                           text: '17:15',
                           icon: Icons.watch_later_outlined,
@@ -61,35 +91,16 @@ class ReminderCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Divider(),
+                    const SizedBox(height: 5),
+                    const Divider(
+                      height: 0,
+                      thickness: 0.75,
+                    ),
                   ],
                 ),
               ),
-            )
-
-            // Expanded(
-            //   child: Text(
-            //     reminder.note,
-            //     style: const TextStyle(
-            //       fontSize: 15,
-            //       fontWeight: FontWeight.bold,
-            //     ),
-            //   ),
-            // ),
-            // Checkbox(
-            //   value: reminder.completed,
-            //   onChanged: (newValue) {
-            //     // Get.find<StorageController>().updateTodo(newValue, uid, reminder.todoId);
-            //   },
-            // ),
-            // IconButton(
-            //   onPressed: () =>
-            //       Get.find<StorageController>().deleteItem(reminder.id!),
-            //   icon: const Icon(
-            //     CupertinoIcons.delete_simple,
-            //   ),
-            // ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -114,8 +125,10 @@ class IconText extends StatelessWidget {
       children: [
         Icon(
           icon,
+          size: textStyle.fontSize! * 1.25,
           color: textStyle.color,
         ),
+        const SizedBox(width: 2.5),
         Text(
           text,
           style: textStyle,

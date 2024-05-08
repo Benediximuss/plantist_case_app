@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
 import 'package:plantist_case_app/controllers/reminders_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
@@ -24,7 +22,7 @@ class HomeScreen extends GetWidget<RemindersController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -77,20 +75,19 @@ class HomeScreen extends GetWidget<RemindersController> {
               const SizedBox(height: 10),
               Obx(
                 () => Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 15),
-                    child: ListView.builder(
-                      itemCount: controller.reminders.length,
-                      itemBuilder: (_, index) {
-                        return ReminderCard(
-                          reminder: controller.reminders[index],
-                        );
+                  child: ListView.builder(
+                    itemCount: controller.reminders.length,
+                    itemBuilder: (_, index) => ReminderCard(
+                      reminder: controller.reminders[index],
+                      onEdit: () {
+                        print("3131: EDIT CLICKED $index");
                       },
+                      onDelete: () => Get.find<StorageController>()
+                          .deleteItem(controller.reminders[index].id!),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
                 child: Row(

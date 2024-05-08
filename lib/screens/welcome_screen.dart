@@ -19,81 +19,74 @@ class WelcomeScreen extends StatelessWidget {
             horizontal: 25.0,
             vertical: 50.0,
           ),
-          child: Container(
-            color: Colors.green[300],
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SimpleShadow(
-                  opacity: 0.3, // Default: 0.5
-                  color: Colors.black, // Default: Black
-                  offset: const Offset(0, 10), // Default: Offset(2, 2)
-                  sigma: 7,
-                  child: Image.asset(
-                    AssetManager.logoWelcomeScreen,
-                    width: 350,
-                    height: 350,
-                  ), // Default: 2
-                ),
-                Text(
-                  'Welcome back to',
-                  style: TextStyles.titleTextSlender(),
-                ),
-                Text(
-                  'Plantist',
-                  style: TextStyles.titleTextBig(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Start your productive life now!',
-                  style: TextStyles.smallText(),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomIconButton(
-                        text: 'Sign in with email',
-                        icon: CupertinoIcons.mail_solid,
-                        onPressed: () => _onSignInPressed(),
-                        lightMode: true,
-                      ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SimpleShadow(
+                opacity: 0.3, // Default: 0.5
+                color: Colors.black, // Default: Black
+                offset: const Offset(0, 10), // Default: Offset(2, 2)
+                sigma: 7,
+                child: Image.asset(
+                  AssetManager.logoWelcomeScreen,
+                  width: 350,
+                  height: 350,
+                ), // Default: 2
+              ),
+              Text(
+                'Welcome back to',
+                style: TextStyles.titleTextSlender(),
+              ),
+              Text(
+                'Plantist',
+                style: TextStyles.titleTextBig(),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Start your productive life now!',
+                style: TextStyles.smallText(),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomIconButton(
+                      text: 'Sign in with email',
+                      icon: CupertinoIcons.mail_solid,
+                      onPressed: () => _onSignInPressed(),
+                      lightMode: true,
                     ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don\'t you have an account?',
-                      style: TextStyles.captionText(),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Don\'t you have an account?',
+                    style: TextStyles.captionText(),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  GestureDetector(
+                    onTap: () => _onSignUpPressed(),
+                    child: Text(
+                      'Sign Up',
+                      style: TextStyles.captionTextHighlighted(),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () => _onSignUpPressed(),
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyles.captionTextHighlighted(),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 1,
-                  color: Colors.black,
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

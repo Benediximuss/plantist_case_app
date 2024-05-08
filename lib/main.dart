@@ -4,6 +4,7 @@ import 'package:plantist_case_app/controllers/bindings/auth_binding.dart';
 import 'package:plantist_case_app/firebase_options.dart';
 import 'package:plantist_case_app/routes/app_pages.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
+import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/utils/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -25,6 +26,9 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Plantist App',
       theme: ThemeData(
+        textTheme: TextTheme(
+          labelLarge: TextStyles.slidemenuText(),
+        ),
         colorScheme: ColorSchemes.mainTheme(),
       ),
       initialRoute: AppPages.initial,

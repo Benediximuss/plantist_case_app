@@ -131,4 +131,12 @@ class TextStyles {
       color: ColorConsts.gray,
     );
   }
+  
+  static TextStyle slidemenuText() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w500,
+    );
+  }
 }
