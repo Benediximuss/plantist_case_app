@@ -114,11 +114,21 @@ class TextStyles {
     );
   }
 
-  // static TextStyle defaultText() {
-  //   return GoogleFonts.getFont(_fontFamily, fontSize: , fontWeight: ,);
-  // }
+  static TextStyle defaultText() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w500,
+      color: ColorConsts.black,
+    );
+  }
 
-  // static TextStyle defaultTextSecondary() {
-  //   return GoogleFonts.getFont(_fontFamily, fontSize: , fontWeight: ,);
-  // }
+  static TextStyle defaultTextSecondary() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w400,
+      color: ColorConsts.gray,
+    );
+  }
 }

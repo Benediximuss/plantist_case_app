@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:plantist_case_app/controllers/bindings/reminders_binding.dart';
+import 'package:plantist_case_app/controllers/bindings/storage_binding.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/screens/home_screen.dart';
 import 'package:plantist_case_app/screens/sign_in_screen.dart';
@@ -22,7 +24,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.signUpScreen,
       page: () => SignUpScreen(),
-      binding: CredentialsBinding(),
+      bindings: [
+        CredentialsBinding(),
+        StorageBinding(),
+      ],
     ),
     GetPage(
       name: AppRoutes.signInScreen,
@@ -32,6 +37,10 @@ class AppPages {
     GetPage(
       name: AppRoutes.homeScreen,
       page: () => const HomeScreen(),
+      bindings: [
+        StorageBinding(),
+        RemindersBinding(),
+      ],
     ),
   ];
 }

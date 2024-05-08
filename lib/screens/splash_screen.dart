@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
 
-class SplashScreen extends GetWidget<AuthController> {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override

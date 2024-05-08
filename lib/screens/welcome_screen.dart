@@ -19,9 +19,11 @@ class WelcomeScreen extends StatelessWidget {
             horizontal: 25.0,
             vertical: 50.0,
           ),
-          child: Center(
+          child: Container(
+            color: Colors.green[300],
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SimpleShadow(
                   opacity: 0.3, // Default: 0.5
@@ -57,7 +59,6 @@ class WelcomeScreen extends StatelessWidget {
                     Expanded(
                       child: CustomIconButton(
                         text: 'Sign in with email',
-                        // icon: Icons.mail_rounded,
                         icon: CupertinoIcons.mail_solid,
                         onPressed: () => _onSignInPressed(),
                         lightMode: true,
@@ -86,6 +87,10 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+                Container(
+                  height: 1,
+                  color: Colors.black,
                 ),
               ],
             ),

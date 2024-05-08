@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:plantist_case_app/models/user_model.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
+import 'package:plantist_case_app/controllers/storage_controller.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';
 
 class AuthController extends GetxController {
@@ -15,7 +17,7 @@ class AuthController extends GetxController {
     _firebaseUser = Rx<User?>(_auth.currentUser);
     _firebaseUser.bindStream(_auth.userChanges());
 
-    ever(_firebaseUser, (callback) {
+    once(_firebaseUser, (callback) {
       if (_firebaseUser.value != null) {
         Get.offAllNamed(AppRoutes.homeScreen);
       } else {
@@ -29,11 +31,19 @@ class AuthController extends GetxController {
     required String password,
   }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+      UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      // await Future.delayed(const Duration(seconds: 1));
+
+      await Get.find<StorageController>().createUser(
+        newUser: UserModel(
+          id: result.user!.uid,
+          email: result.user!.email!,
+        ),
+      );
+
+      await _auth.signOut();
     } on FirebaseAuthException catch (e) {
       NotificationUtils.showCustomSnackbar(
         title: "Error signing up",

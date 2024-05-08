@@ -1,26 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/reminders_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
-import 'package:plantist_case_app/services/firedb.dart';
+import 'package:plantist_case_app/controllers/storage_controller.dart';
+import 'package:plantist_case_app/utils/notification_utils.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
+import 'package:plantist_case_app/widgets/reminder_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetWidget<RemindersController> {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -29,6 +34,22 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.check_circle,
+                            color: Get.find<AuthController>().activeUser != null
+                                ? Colors.green
+                                : Colors.grey,
+                            size: TextStyles.titleTextBig().fontSize!,
+                          ),
+                          onPressed: () => NotificationUtils.showCustomSnackbar(
+                              title: 'Welcome back!',
+                              message: Get.find<AuthController>()
+                                      .activeUser
+                                      ?.email ??
+                                  'null'),
+                        ),
+                        const SizedBox(width: 10),
                         IconButton(
                           icon: Icon(
                             CupertinoIcons.search,
@@ -52,29 +73,39 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-                    Text(
-                      'WELCOME BACK',
-                      style: TextStyles.titleTextBig(),
+              ),
+              const SizedBox(height: 10),
+              Obx(
+                () => Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 10, 0, 15),
+                    child: ListView.builder(
+                      itemCount: controller.reminders.length,
+                      itemBuilder: (_, index) {
+                        return ReminderCard(
+                          reminder: controller.reminders[index],
+                        );
+                      },
                     ),
-                    const SizedBox(height: 10),
-                    Icon(
-                      Icons.check_circle,
-                      color: Get.find<AuthController>().activeUser != null
-                          ? Colors.green
-                          : Colors.grey,
-                      size: 150,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomIconButton(
+                        text: 'New Reminder',
+                        onPressed: _postLogic,
+                        icon: Icons.add_rounded,
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                CustomIconButton(
-                  text: 'POST DATA',
-                  onPressed: _postLogic,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -88,6 +119,6 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _postLogic() {
-    Firedb.postNewItem();
+    Get.find<StorageController>().postNewItem();
   }
 }
