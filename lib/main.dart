@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/bindings/auth_binding.dart';
+import 'package:plantist_case_app/firebase_options.dart';
 import 'package:plantist_case_app/routes/app_pages.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/themes.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   AppPages.initial = AppRoutes.splashScreen;
 
