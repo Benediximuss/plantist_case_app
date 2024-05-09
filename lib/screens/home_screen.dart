@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
 import 'package:plantist_case_app/controllers/reminders_controller.dart';
@@ -8,10 +6,10 @@ import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/controllers/storage_controller.dart';
 import 'package:plantist_case_app/screens/bottomsheet/edit_reminder_sheet.dart';
-import 'package:plantist_case_app/utils/notification_utils.dart';
+import 'package:plantist_case_app/screens/reminderlist/reminderlist2.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
-import 'package:plantist_case_app/widgets/reminder_card.dart';
+import 'package:plantist_case_app/widgets/elevated_icon.dart';
 
 class HomeScreen extends GetWidget<RemindersController> {
   const HomeScreen({super.key});
@@ -24,7 +22,7 @@ class HomeScreen extends GetWidget<RemindersController> {
           child: Stack(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
@@ -35,75 +33,49 @@ class HomeScreen extends GetWidget<RemindersController> {
                           'Plantist',
                           style: TextStyles.titleTextBig(),
                         ),
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(
-                                Icons.check_circle,
-                                color: Get.find<AuthController>().activeUser !=
-                                        null
-                                    ? Colors.green
-                                    : Colors.grey,
-                                size: TextStyles.titleTextBig().fontSize!,
-                              ),
-                              onPressed: () =>
-                                  NotificationUtils.showCustomSnackbar(
-                                      title: 'Welcome back!',
-                                      message: Get.find<AuthController>()
-                                              .activeUser
-                                              ?.email ??
-                                          'null'),
-                            ),
-                            const SizedBox(width: 10),
-                            IconButton(
-                              icon: Icon(
-                                CupertinoIcons.search,
-                                weight: 0.7,
-                                size: TextStyles.titleTextBig().fontSize!,
-                              ),
-                              onPressed: () {
-                                print('Search button pressed');
-                              },
-                            ),
-                            const SizedBox(width: 10),
-                            IconButton(
-                              icon: Icon(
-                                Icons.logout_rounded,
-                                weight: 0.1,
-                                size: TextStyles.titleTextBig().fontSize!,
-                              ),
-                              onPressed: () => _onLogOutPressed(),
-                            ),
-                          ],
+                        IconButton(
+                          icon: Icon(
+                            Icons.logout_rounded,
+                            weight: 0.1,
+                            size: TextStyles.titleTextBig().fontSize!,
+                          ),
+                          onPressed: () => _onLogOutPressed(),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Obx(
-                    () => Expanded(
-                      child: SlidableAutoCloseBehavior(
-                        child: ListView.builder(
-                          itemCount: controller.reminders.length,
-                          itemBuilder: (_, index) => ReminderCard(
-                            reminder: controller.reminders[index],
-                            onEdit: () {
-                              _showReminderSheet(
-                                reminder: controller.reminders[index],
-                              );
-                            },
-                            onDelete: () => Get.find<StorageController>()
-                                .deleteItem(controller.reminders[index].id!),
-                          ),
+                  Obx(() {
+                    if (controller.reminders.isEmpty) {
+                      return Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const ElevatedIcon(
+                              iconData: Icons.checklist_rounded,
+                            ),
+                            SizedBox(height: 30),
+                            Text(
+                              'No reminders here!',
+                              style: TextStyles.buttonText().copyWith(
+                                color: Colors.black54,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
+                      );
+                    } else {
+                      return Expanded(
+                        child: ReminderList2(
+                          reminderList: controller.reminders,
+                          onEditAction: _showReminderSheet,
+                          onDeleteAction: _deleteReminder,
+                          onCompleteAction: _completeReminder,
+                        ),
+                      );
+                    }
+                  }),
+                  // const SizedBox(height: 50),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 15, 15),
                     child: Row(
@@ -133,11 +105,19 @@ class HomeScreen extends GetWidget<RemindersController> {
         );
   }
 
+  void _completeReminder(ReminderModel reminder) {
+    Get.find<StorageController>().completeReminder(reminder);
+  }
+
+  void _deleteReminder(ReminderModel reminder) {
+    Get.find<StorageController>().deleteReminder(reminder.id!);
+  }
+
   void _showReminderSheet({ReminderModel? reminder}) {
     Get.bottomSheet(
       EditReminderSheet(
         reminder: reminder,
-        onPressedSubmit: Get.find<StorageController>().postNewItem,
+        onPressedSubmit: Get.find<StorageController>().postReminder,
       ),
     );
   }

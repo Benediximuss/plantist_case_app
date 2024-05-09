@@ -37,10 +37,12 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 'Welcome back to',
                 style: TextStyles.titleTextSlender(),
+                textAlign: TextAlign.center,
               ),
               Text(
                 'Plantist',
                 style: TextStyles.titleTextBig(),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 10,
@@ -48,6 +50,7 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 'Start your productive life now!',
                 style: TextStyles.smallText(),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 20,

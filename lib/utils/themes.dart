@@ -5,10 +5,10 @@ class ColorSchemes {
   const ColorSchemes._();
 
   static ColorScheme mainTheme() {
-    return ColorScheme(
+    return const ColorScheme(
       brightness: Brightness.light,
       // Button tint / InputField Bottom Frame When Focussed
-      primary: Colors.grey[500]!,
+      primary: Colors.black26,
 
       onPrimary: Colors.blue,
       secondary: Colors.amber,

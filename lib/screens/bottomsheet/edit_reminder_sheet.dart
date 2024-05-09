@@ -75,7 +75,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                                     controller.enableLoader();
                                     onPressedSubmit(
                                             reminder: controller
-                                                .getReminder(reminder?.id))
+                                                .getReminder(reminder))
                                         .then((_) => Get.back())
                                         .whenComplete(
                                             () => controller.disableLoader());

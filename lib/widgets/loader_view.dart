@@ -24,8 +24,11 @@ class LoaderView extends StatelessWidget {
             ),
           ),
         if (condition)
-          const Center(
-            child: CircularProgressIndicator(),
+          Center(
+            child: CircularProgressIndicator(
+              color: Colors.green[300],
+              backgroundColor: Colors.grey,
+            ),
           ),
       ],
     );

@@ -4,6 +4,7 @@ class ReminderModel {
   String? id;
   String title;
   int priority;
+  bool completed;
   String? note;
   Timestamp? due;
   bool timeInDue;
@@ -12,6 +13,7 @@ class ReminderModel {
     this.id,
     required this.title,
     required this.priority,
+    required this.completed,
     this.note,
     this.due,
     this.timeInDue = false,
@@ -24,6 +26,7 @@ class ReminderModel {
       id: documentSnapshot.id,
       title: documentSnapshot['title'],
       priority: documentSnapshot["priority"],
+      completed: documentSnapshot["completed"],
       note: documentSnapshot['note'],
       due: documentSnapshot['due'],
       timeInDue: documentSnapshot['timeInDue'],
@@ -34,6 +37,7 @@ class ReminderModel {
     return {
       'title': title,
       'priority': priority,
+      'completed': completed,
       'note': note,
       'due': due,
       'timeInDue': timeInDue,

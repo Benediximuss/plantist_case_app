@@ -123,7 +123,7 @@ class TextStyles {
     return GoogleFonts.getFont(
       _fontFamily,
       fontSize: 17,
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w500,
       color: ColorConsts.black,
     );
   }

@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
+import 'package:plantist_case_app/utils/colors.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 
 class ReminderCard extends StatelessWidget {
   final ReminderModel reminder;
   final VoidCallback onEdit;
   final VoidCallback onDelete;
+  final VoidCallback onComplete;
 
   const ReminderCard({
     super.key,
     required this.reminder,
     required this.onEdit,
     required this.onDelete,
+    required this.onComplete,
   });
 
   @override
@@ -27,9 +30,7 @@ class ReminderCard extends StatelessWidget {
         endActionPane: ActionPane(
           motion: const DrawerMotion(),
           dismissible: DismissiblePane(
-            onDismissed: () {
-              onDelete();
-            },
+            onDismissed: () => onDelete(),
           ),
           children: [
             SlidableAction(
@@ -51,16 +52,22 @@ class ReminderCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                padding: const EdgeInsets.all(0.5),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: chooseColor(reminder.priority),
-                ),
-                child: Icon(
-                  CupertinoIcons.circle_filled,
-                  color: Colors.white.withOpacity(0.9),
-                  size: 25,
+              GestureDetector(
+                onTap: () => onComplete(),
+                child: Container(
+                  padding: const EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: chooseColor(reminder.priority),
+                  ),
+                  child: Icon(
+                    reminder.completed
+                        ? CupertinoIcons.checkmark_circle_fill
+                        : CupertinoIcons.circle_filled,
+                    color: Colors.white
+                        .withOpacity(reminder.completed ? 0.5 : 0.9),
+                    size: 25,
+                  ),
                 ),
               ),
               const SizedBox(width: 15),
@@ -80,7 +87,13 @@ class ReminderCard extends StatelessWidget {
                               scrollDirection: Axis.horizontal,
                               child: Text(
                                 reminder.title,
-                                style: TextStyles.defaultText(),
+                                style: reminder.completed
+                                    ? TextStyles.defaultText().copyWith(
+                                        decoration: TextDecoration.lineThrough,
+                                        decorationColor: Colors.grey[800],
+                                        decorationThickness: 1.7,
+                                      )
+                                    : TextStyles.defaultText(),
                               ),
                             ),
                           ),

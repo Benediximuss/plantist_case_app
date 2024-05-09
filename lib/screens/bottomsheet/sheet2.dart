@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/utils/colors.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
-import 'package:plantist_case_app/widgets/reminder_card.dart';
+import 'package:plantist_case_app/screens/reminderlist/reminder_card.dart';
 
 class Sheet2 extends GetWidget<EditReminderController> {
   const Sheet2({super.key});
@@ -120,7 +120,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                             initialTime:
                                                 controller.selectedTime,
                                             initialEntryMode:
-                                                TimePickerEntryMode.input,
+                                                TimePickerEntryMode.inputOnly,
                                             builder: (BuildContext context,
                                                 Widget? child) {
                                               return MediaQuery(

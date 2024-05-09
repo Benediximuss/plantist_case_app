@@ -128,18 +128,6 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                         ],
                       ),
                       const SizedBox(height: 30),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DynamicButton(
-                              text: 'DIRECT PASS',
-                              enabled: true,
-                              onPressed: () => onSuccessful(),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 30),
                     ],
                   ),
                 ),

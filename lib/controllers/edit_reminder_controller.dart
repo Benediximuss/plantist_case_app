@@ -37,7 +37,7 @@ class EditReminderController extends GetxController {
   final Rx<bool> _isReminderValid = Rx<bool>(false);
   final Rx<bool> _dateSwitch = Rx<bool>(false);
   final Rx<bool> _timeSwitch = Rx<bool>(false);
-  final Rx<int> _priority = Rx<int>(2);
+  final Rx<int> _priority = Rx<int>(0);
 
   bool get isReminderValid => _isReminderValid.value;
   bool get dateSwitch => _dateSwitch.value;
@@ -96,7 +96,7 @@ class EditReminderController extends GetxController {
     _isLoading.value = false;
   }
 
-  ReminderModel getReminder(String? rid) {
+  ReminderModel getReminder(ReminderModel? reminder) {
     if (dateSwitch && timeSwitch) {
       _selectedDate.value = DateTime(
         _selectedDate.value.year,
@@ -108,9 +108,10 @@ class EditReminderController extends GetxController {
     }
 
     return ReminderModel(
-      id: rid,
+      id: reminder?.id,
       title: titleController.text.trim(),
       priority: priority,
+      completed: reminder?.completed ?? false,
       note: noteController.text.trim().isNotEmpty
           ? noteController.text.trim()
           : null,
