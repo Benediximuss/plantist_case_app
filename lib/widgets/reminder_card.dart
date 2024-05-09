@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 
@@ -21,9 +22,15 @@ class ReminderCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 15),
       child: Slidable(
+        key: ValueKey(reminder),
         closeOnScroll: true,
         endActionPane: ActionPane(
-          motion: const ScrollMotion(),
+          motion: const DrawerMotion(),
+          dismissible: DismissiblePane(
+            onDismissed: () {
+              onDelete();
+            },
+          ),
           children: [
             SlidableAction(
               onPressed: (_) => onEdit(),
@@ -46,12 +53,9 @@ class ReminderCard extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(0.5),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  // color: Color(0xFFd97c7d), // HIGH
-                  color: Color(0xFFe69340), // MEDIUM
-                  // color: Color(0xFF2a73e6), // LOW
-                  // color: Color(0xFFb7b7b9), // NONE
+                  color: chooseColor(reminder.priority),
                 ),
                 child: Icon(
                   CupertinoIcons.circle_filled,
@@ -64,32 +68,59 @@ class ReminderCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Evening zoom call',
-                      style: TextStyles.defaultText(),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      'Reminders',
-                      style: TextStyles.defaultTextSecondary(),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        IconText(
-                          text: '27.01.2024',
-                          icon: CupertinoIcons.calendar,
-                          textStyle: TextStyles.defaultTextSecondary(),
-                        ),
-                        const SizedBox(width: 15),
-                        IconText(
-                          text: '17:15',
-                          icon: Icons.watch_later_outlined,
-                          textStyle: TextStyles.defaultTextSecondary().copyWith(
-                            color: Colors.red[300],
+                    Padding(
+                      padding: const EdgeInsets.only(right: 25.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            constraints:
+                                BoxConstraints.loose(const Size.fromHeight(25)),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Text(
+                                reminder.title,
+                                style: TextStyles.defaultText(),
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 5),
+                          if (reminder.note != null)
+                            Container(
+                              constraints: BoxConstraints.loose(
+                                  const Size.fromHeight(100)),
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  reminder.note!,
+                                  style: TextStyles.defaultTextSecondary(),
+                                ),
+                              ),
+                            ),
+                          const SizedBox(height: 15),
+                          if (reminder.due != null)
+                            Row(
+                              children: [
+                                IconText(
+                                  text: DateFormat('dd.MM.yyyy')
+                                      .format(reminder.due!.toDate()),
+                                  icon: CupertinoIcons.calendar,
+                                  textStyle: TextStyles.defaultTextSecondary(),
+                                ),
+                                const SizedBox(width: 15),
+                                if (reminder.timeInDue)
+                                  IconText(
+                                    text: DateFormat('HH:mm')
+                                        .format(reminder.due!.toDate()),
+                                    icon: Icons.watch_later_outlined,
+                                    textStyle: TextStyles.defaultTextSecondary()
+                                        .copyWith(
+                                      color: Colors.red[300],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 5),
                     const Divider(
@@ -105,6 +136,24 @@ class ReminderCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Color chooseColor(int pri) {
+  late final Color ret;
+  switch (pri) {
+    case 0:
+      ret = const Color(0xFFb7b7b9); // NONE
+      break;
+    case 1:
+      ret = const Color(0xFF2a73e6); // LOW
+      break;
+    case 2:
+      ret = const Color(0xFFe69340); // MEDIUM
+      break;
+    case 3:
+      ret = const Color(0xFFd97c7d); // HIGH
+  }
+  return ret;
 }
 
 class IconText extends StatelessWidget {

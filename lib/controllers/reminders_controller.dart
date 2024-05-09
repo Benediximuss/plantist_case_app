@@ -13,6 +13,9 @@ class RemindersController extends GetxController {
   void onInit() {
     super.onInit();
     _bindReminders();
+    ever(_reminderList, (callback) {
+      print("3131: liste degisti");
+    });
   }
 
   void _bindReminders() {

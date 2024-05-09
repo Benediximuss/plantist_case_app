@@ -93,9 +93,14 @@ class TextStyles {
     );
   }
 
-  // static TextStyle placeHolderText() {
-  //   return GoogleFonts.getFont(_fontFamily, fontSize: , fontWeight: ,);
-  // }
+  static TextStyle placeHolderText() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w700,
+      color: ColorConsts.gray,
+    );
+  }
 
   static TextStyle inputText() {
     return GoogleFonts.getFont(
@@ -118,8 +123,26 @@ class TextStyles {
     return GoogleFonts.getFont(
       _fontFamily,
       fontSize: 17,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
       color: ColorConsts.black,
+    );
+  }
+
+  static TextStyle defaultTextBold() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w600,
+      color: ColorConsts.black,
+    );
+  }
+
+  static TextStyle defaultTextPlaceholder() {
+    return GoogleFonts.getFont(
+      _fontFamily,
+      fontSize: 17,
+      fontWeight: FontWeight.w500,
+      color: ColorConsts.gray,
     );
   }
 
@@ -131,7 +154,7 @@ class TextStyles {
       color: ColorConsts.gray,
     );
   }
-  
+
   static TextStyle slidemenuText() {
     return GoogleFonts.getFont(
       _fontFamily,

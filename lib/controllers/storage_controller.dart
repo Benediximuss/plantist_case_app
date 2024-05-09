@@ -16,14 +16,17 @@ class StorageController extends GetxController {
           .set(_addTimestamp(newUser.toJson()));
     } on FirebaseException catch (e) {
       NotificationUtils.showCustomSnackbar(
-        title: "1: Error posting",
+        title: "Error creating user",
         message: e.message.toString(),
       );
+      rethrow;
     } catch (e) {
       NotificationUtils.showCustomSnackbar(
-        title: "2: Error posting",
-        message: e.toString(),
+        title: "Error creating user",
+        message: 'An error occurred, please try again',
       );
+      print(e.toString());
+      rethrow;
     }
   }
 
@@ -32,7 +35,7 @@ class StorageController extends GetxController {
         .collection("users")
         .doc(uid)
         .collection("reminders")
-        .orderBy("priority", descending: true)
+        .orderBy("due", descending: false)
         .snapshots()
         .map((QuerySnapshot query) {
       List<ReminderModel> retVal = <ReminderModel>[];
@@ -45,22 +48,91 @@ class StorageController extends GetxController {
     });
   }
 
-  Future<void> postNewItem() async {
-    ReminderModel newRem = ReminderModel(
-      priority: 3,
-      title: 'porno',
-      note: 'amk',
-      due: Timestamp.now(),
-      completed: true,
-    );
+  Future<void> postNewItem({required ReminderModel reminder}) async {
+    try {
+      if (reminder.id == null) {
+        await _fireStore
+            .collection('users')
+            .doc(Get.find<AuthController>().activeUser!.uid)
+            .collection('reminders')
+            .doc()
+            .set(_addTimestamp(reminder.toJson()));
+      } else {
+        await _fireStore
+            .collection('users')
+            .doc(Get.find<AuthController>().activeUser!.uid)
+            .collection('reminders')
+            .doc(reminder.id)
+            .set(_addTimestamp(reminder.toJson()));
+      }
+    } on FirebaseException catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title:
+            "Error ${reminder.id == null ? 'updating' : 'creating'} reminder",
+        message: e.message.toString(),
+      );
+      rethrow;
+    } catch (e) {
+      Get.snackbar("title", "message");
+      NotificationUtils.showCustomSnackbar(
+        title:
+            "Error ${reminder.id == null ? 'updating' : 'creating'} reminder",
+        message: "An error occurred, please try again",
+      );
+
+      print(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> postDummy() async {
+    List<ReminderModel> listed = [
+      ReminderModel(
+        priority: 2,
+        title: 'Odev yap',
+      ),
+      ReminderModel(
+        priority: 1,
+        title: '31 koy',
+        note: 'saglam bir porno ac',
+      ),
+      ReminderModel(
+        priority: 0,
+        title: 'Tras ol',
+        due: Timestamp.now(),
+      ),
+      ReminderModel(
+        priority: 3,
+        title: 'porno',
+        due: Timestamp.now(),
+        timeInDue: true,
+      ),
+      ReminderModel(
+        priority: 0,
+        title: 'masa topla',
+        note: 'sik sok işler hakketen aq',
+        due: Timestamp.now(),
+      ),
+      ReminderModel(
+        priority: 0,
+        title:
+            'masa topla ve sonra kalkıpğ siktor olup git lütfen masa topla ve sonra kalkıpğ siktor olup git lütfen masa topla ve sonra kalkıpğ siktor olup git lütfen',
+        note:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.',
+        due: Timestamp.now(),
+        timeInDue: true,
+      ),
+    ];
 
     try {
-      await _fireStore
-          .collection('users')
-          .doc(Get.find<AuthController>().activeUser!.uid)
-          .collection('reminders')
-          .doc()
-          .set(_addTimestamp(newRem.toJson()));
+      listed.forEach((element) async {
+        await _fireStore
+            .collection('users')
+            .doc(Get.find<AuthController>().activeUser!.uid)
+            .collection('reminders')
+            .doc()
+            .set(_addTimestamp(element.toJson()));
+      });
     } on FirebaseException catch (e) {
       NotificationUtils.showCustomSnackbar(
         title: "1: Error posting",
@@ -82,11 +154,21 @@ class StorageController extends GetxController {
           .collection('reminders')
           .doc(docId)
           .delete();
-    } catch (e) {
+    } on FirebaseException catch (e) {
       NotificationUtils.showCustomSnackbar(
-        title: 'Error deleting',
-        message: e.toString(),
+        title: "Error deleting reminder",
+        message: e.message.toString(),
       );
+      rethrow;
+    } catch (e) {
+      Get.snackbar("title", "message");
+      NotificationUtils.showCustomSnackbar(
+        title: "Error deleting reminder",
+        message: "An error occurred, please try again",
+      );
+
+      print(e.toString());
+      rethrow;
     }
   }
 

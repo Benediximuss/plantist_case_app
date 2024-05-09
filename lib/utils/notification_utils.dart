@@ -21,20 +21,22 @@ class NotificationUtils {
         message,
         textAlign: TextAlign.center,
         style: TextStyles.smallText().copyWith(
-          color: Colors.grey[600],
+          color: Colors.black54,
         ),
       ),
       snackPosition: SnackPosition.BOTTOM,
       margin: const EdgeInsets.all(20.0),
+      backgroundColor: const Color(0xFF646464).withOpacity(0.6),
       backgroundGradient: LinearGradient(
         colors: [
-          const Color(0xFFC4C4C4).withOpacity(0.8), // Light grey
-          const Color(0xFF646464).withOpacity(0.8), // Dark grey
-          const Color(0xFF444444).withOpacity(0.8), // Even darker grey
+          const Color(0xFFC4C4C4).withOpacity(0.6), // Light grey
+          const Color(0xFF646464).withOpacity(0.6), // Dark grey
+          const Color(0xFF444444).withOpacity(0.6), // Even darker grey
         ],
         begin: Alignment.centerLeft,
         end: Alignment.centerRight,
       ),
+      duration: const Duration(seconds: 1, milliseconds: 500),
     );
   }
 
