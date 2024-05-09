@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 
 class EditReminderController extends GetxController {
+  EditReminderController(this.reminder);
+
+  final ReminderModel? reminder;
+
   final PageController pageController = PageController(initialPage: 0);
   final Rx<int> _pageIndex = Rx<int>(0);
 
@@ -33,7 +37,7 @@ class EditReminderController extends GetxController {
   final Rx<bool> _isReminderValid = Rx<bool>(false);
   final Rx<bool> _dateSwitch = Rx<bool>(false);
   final Rx<bool> _timeSwitch = Rx<bool>(false);
-  final Rx<int> _priority = Rx<int>(0);
+  final Rx<int> _priority = Rx<int>(2);
 
   bool get isReminderValid => _isReminderValid.value;
   bool get dateSwitch => _dateSwitch.value;
@@ -49,9 +53,14 @@ class EditReminderController extends GetxController {
   final Rx<bool> _isLoading = Rx<bool>(false);
   bool get isLoading => _isLoading.value;
 
-  // late String? _reminderID;
+  @override
+  void onInit() {
+    if (reminder != null) initReminderValues(reminder!);
 
-  void initReminder(ReminderModel reminder) {
+    super.onInit();
+  }
+
+  void initReminderValues(ReminderModel reminder) {
     titleController.text = reminder.title;
     noteController.text = reminder.note ?? '';
     if (reminder.due != null) {
@@ -100,7 +109,7 @@ class EditReminderController extends GetxController {
 
     return ReminderModel(
       id: rid,
-      title: titleController.text,
+      title: titleController.text.trim(),
       priority: priority,
       note: noteController.text.trim().isNotEmpty
           ? noteController.text.trim()

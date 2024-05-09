@@ -50,20 +50,17 @@ class StorageController extends GetxController {
 
   Future<void> postNewItem({required ReminderModel reminder}) async {
     try {
+      final collection = _fireStore
+          .collection('users')
+          .doc(Get.find<AuthController>().activeUser!.uid)
+          .collection('reminders');
+
+      final newDoc = _addTimestamp(reminder.toJson());
+
       if (reminder.id == null) {
-        await _fireStore
-            .collection('users')
-            .doc(Get.find<AuthController>().activeUser!.uid)
-            .collection('reminders')
-            .doc()
-            .set(_addTimestamp(reminder.toJson()));
+        await collection.doc().set(newDoc);
       } else {
-        await _fireStore
-            .collection('users')
-            .doc(Get.find<AuthController>().activeUser!.uid)
-            .collection('reminders')
-            .doc(reminder.id)
-            .set(_addTimestamp(reminder.toJson()));
+        await collection.doc(reminder.id).set(newDoc);
       }
     } on FirebaseException catch (e) {
       NotificationUtils.showCustomSnackbar(
@@ -173,5 +170,5 @@ class StorageController extends GetxController {
   }
 
   Map<String, dynamic> _addTimestamp(Map<String, dynamic> json) =>
-      json..['created_at'] = FieldValue.serverTimestamp();
+      json..['last_edit'] = FieldValue.serverTimestamp();
 }

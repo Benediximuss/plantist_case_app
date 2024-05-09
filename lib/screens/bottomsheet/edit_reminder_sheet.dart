@@ -22,9 +22,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
   @override
   Widget build(BuildContext context) {
     final EditReminderController controller =
-        Get.put<EditReminderController>(EditReminderController());
-
-    if (reminder != null) controller.initReminder(reminder!);
+        Get.put<EditReminderController>(EditReminderController(reminder));
 
     return Container(
       decoration: const BoxDecoration(
