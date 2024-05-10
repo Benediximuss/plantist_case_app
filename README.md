@@ -33,22 +33,22 @@ Created by Uğur Öztunç
 ### Installation
 1. **Clone the repository:**
 ```bash
-`git clone https://github.com/Benediximuss/plantist_case_app`
+git clone https://github.com/Benediximuss/plantist_case_app
 ```
 
 2. **Navigate to the project directory:**
 ```bash
-`cd plantist`
+cd plantist
 ```
 
 3. **Get dependencies:**
 ```bash
-`flutter pub get`
+flutter pub get
 ```
 
 4. **Run the app:**
 ```bash
-`flutter run`
+flutter run
 ```
 
 ## Important Notes
