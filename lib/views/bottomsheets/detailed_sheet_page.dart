@@ -4,11 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
-import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
 
-class Sheet2 extends GetWidget<EditReminderController> {
-  const Sheet2({super.key});
+class DetailedSheetPage extends GetWidget<EditReminderController> {
+  const DetailedSheetPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +176,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                         padding: const EdgeInsets.all(0.5),
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
-                                          color: chooseColor(item['value'] as int),
+                                          color: ColorManager.getPriorityColor(item['value'] as int),
                                         ),
                                         child: Icon(
                                           CupertinoIcons.circle_filled,

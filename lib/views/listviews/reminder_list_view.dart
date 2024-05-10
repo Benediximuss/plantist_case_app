@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
+import 'package:plantist_case_app/views/listviews/reminder_card.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:plantist_case_app/utils/date_time_utils.dart';
 
-class ReminderList2 extends StatelessWidget {
+class ReminderListView extends StatelessWidget {
   final List<ReminderModel> reminderList;
   final void Function({ReminderModel? reminder}) onEditAction;
   final void Function(ReminderModel) onDeleteAction;
   final void Function(ReminderModel) onCompleteAction;
 
-  const ReminderList2({
+  const ReminderListView({
     super.key,
     required this.reminderList,
     required this.onEditAction,
@@ -25,17 +24,13 @@ class ReminderList2 extends StatelessWidget {
     return SlidableAutoCloseBehavior(
       child: GroupedListView<ReminderModel, String?>(
         elements: reminderList,
-        groupBy: (element) => element.due != null
-            ? DateTimeUtils.dateToDay(element.due!.toDate())
-            : null,
-        groupComparator: (value1, value2) =>
-            DateTimeUtils.compareNullableDates(value1, value2),
+        groupBy: (element) => element.due != null ? DateTimeUtils.dateToDay(element.due!.toDate()) : null,
+        groupComparator: (value1, value2) => DateTimeUtils.compareNullableDates(value1, value2),
         itemComparator: (element1, element2) {
           int res;
 
           if (element1.completed == element2.completed) {
-            res =
-                DateTimeUtils.compareNullableDates(element1.due, element2.due);
+            res = DateTimeUtils.compareNullableDates(element1.due, element2.due);
 
             if (res != 0) {
               return res;

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
 
 class AuthBinding implements Bindings {
   @override

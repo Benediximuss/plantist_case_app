@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/views/bottomsheet/sheet1.dart';
-import 'package:plantist_case_app/views/bottomsheet/sheet2.dart';
+import 'package:plantist_case_app/views/bottomsheets/main_sheet_page.dart';
+import 'package:plantist_case_app/views/bottomsheets/detailed_sheet_page.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
 class EditReminderSheet extends GetWidget<EditReminderController> {
   final ReminderModel? reminder;
-  final Future<void> Function({required ReminderModel reminder})
-      onPressedSubmit;
+  final Future<void> Function({required ReminderModel reminder}) onPressedSubmit;
 
   const EditReminderSheet({
     super.key,
@@ -21,8 +19,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
 
   @override
   Widget build(BuildContext context) {
-    final EditReminderController controller =
-        Get.put<EditReminderController>(EditReminderController(reminder));
+    final EditReminderController controller = Get.put<EditReminderController>(EditReminderController(reminder));
 
     return Container(
       decoration: const BoxDecoration(
@@ -39,8 +36,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
             child: LoaderView(
               condition: controller.isLoading,
               child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 10, bottom: 0, left: 5, right: 5),
+                padding: const EdgeInsets.only(top: 10, bottom: 0, left: 5, right: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -51,23 +47,19 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                             child: Text(
                               controller.pageIndex == 0 ? 'Cancel' : 'Back',
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Colors.blue,
-                              ),
+                                    color: Colors.blue,
+                                  ),
                             ),
-                            onPressed: () => controller.pageIndex == 0
-                                ? Get.back()
-                                : controller.switchPage(),
+                            onPressed: () => controller.pageIndex == 0 ? Get.back() : controller.switchPage(),
                           ),
                           Expanded(
                             child: Container(),
                           ),
                           Text(
-                            controller.pageIndex == 0
-                                ? 'New Reminder'
-                                : 'Details',
+                            controller.pageIndex == 0 ? 'New Reminder' : 'Details',
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                                  fontWeight: FontWeight.w600,
+                                ),
                           ),
                           Expanded(child: Container()),
                           TextButton(
@@ -75,22 +67,17 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                                 ? () {
                                     FocusScope.of(context).unfocus();
                                     controller.enableLoader();
-                                    onPressedSubmit(
-                                            reminder: controller
-                                                .generateReminder(reminder))
+                                    onPressedSubmit(reminder: controller.generateReminder(reminder))
                                         .then((_) => Get.back())
-                                        .whenComplete(
-                                            () => controller.disableLoader());
+                                        .whenComplete(() => controller.disableLoader());
                                   }
                                 : null,
                             child: Text(
                               reminder != null ? 'Update' : 'Add',
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: controller.isReminderValid
-                                    ? Colors.blue
-                                    : ColorManager.gray,
-                              ),
+                                    fontWeight: FontWeight.w700,
+                                    color: controller.isReminderValid ? Colors.blue : ColorManager.gray,
+                                  ),
                             ),
                           ),
                         ],
@@ -100,11 +87,10 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                       child: SizedBox(
                         child: PageView(
                           controller: controller.pageController,
-                          onPageChanged: (index) =>
-                              controller.pageIndex = index,
+                          onPageChanged: (index) => controller.pageIndex = index,
                           children: const [
-                            Sheet1(),
-                            Sheet2(),
+                            MainSheetPage(),
+                            DetailedSheetPage(),
                           ],
                         ),
                       ),

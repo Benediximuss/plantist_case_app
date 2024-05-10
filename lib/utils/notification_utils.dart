@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 
 class NotificationUtils {
   const NotificationUtils._();

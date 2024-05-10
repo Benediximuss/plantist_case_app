@@ -22,11 +22,10 @@ class CustomIconButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          // backgroundColor: MaterialStateProperty.all<Color>(
-          //   const Color.fromRGBO(245, 245, 245, 1.0),
-          // ),
           backgroundColor: MaterialStateProperty.all<Color>(
-            lightMode ? const Color.fromRGBO(245, 245, 245, 1.0) : (onPressed != null ? ColorManager.indigo : const Color.fromRGBO(182, 185, 190, 1.0)),
+            lightMode
+                ? const Color.fromRGBO(245, 245, 245, 1.0)
+                : (onPressed != null ? ColorManager.indigo : const Color.fromRGBO(182, 185, 190, 1.0)),
           ),
           shape: MaterialStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(

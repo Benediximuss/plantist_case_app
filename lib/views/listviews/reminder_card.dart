@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 
 class ReminderCard extends StatelessWidget {
   final ReminderModel reminder;
@@ -57,14 +57,11 @@ class ReminderCard extends StatelessWidget {
                   padding: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: chooseColor(reminder.priority),
+                    color: ColorManager.getPriorityColor(reminder.priority),
                   ),
                   child: Icon(
-                    reminder.completed
-                        ? CupertinoIcons.checkmark_circle_fill
-                        : CupertinoIcons.circle_filled,
-                    color: Colors.white
-                        .withOpacity(reminder.completed ? 0.5 : 0.9),
+                    reminder.completed ? CupertinoIcons.checkmark_circle_fill : CupertinoIcons.circle_filled,
+                    color: Colors.white.withOpacity(reminder.completed ? 0.5 : 0.9),
                     size: 25,
                   ),
                 ),
@@ -80,18 +77,17 @@ class ReminderCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            constraints:
-                                BoxConstraints.loose(const Size.fromHeight(25)),
+                            constraints: BoxConstraints.loose(const Size.fromHeight(25)),
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Text(
                                 reminder.title,
                                 style: reminder.completed
                                     ? Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        decoration: TextDecoration.lineThrough,
-                                        decorationColor: Colors.grey[800],
-                                        decorationThickness: 1.7,
-                                      )
+                                          decoration: TextDecoration.lineThrough,
+                                          decorationColor: Colors.grey[800],
+                                          decorationThickness: 1.7,
+                                        )
                                     : Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
@@ -99,8 +95,7 @@ class ReminderCard extends StatelessWidget {
                           const SizedBox(height: 5),
                           if (reminder.note != null)
                             Container(
-                              constraints: BoxConstraints.loose(
-                                  const Size.fromHeight(100)),
+                              constraints: BoxConstraints.loose(const Size.fromHeight(100)),
                               child: SingleChildScrollView(
                                 child: Text(
                                   reminder.note!,
@@ -113,21 +108,18 @@ class ReminderCard extends StatelessWidget {
                             Row(
                               children: [
                                 IconText(
-                                  text: DateFormat('dd.MM.yyyy')
-                                      .format(reminder.due!.toDate()),
+                                  text: DateFormat('dd.MM.yyyy').format(reminder.due!.toDate()),
                                   icon: CupertinoIcons.calendar,
-                                  textStyle: Theme.of(context).textTheme!.labelMedium!,
+                                  textStyle: Theme.of(context).textTheme.labelMedium!,
                                 ),
                                 const SizedBox(width: 15),
                                 if (reminder.timeInDue)
                                   IconText(
-                                    text: DateFormat('HH:mm')
-                                        .format(reminder.due!.toDate()),
+                                    text: DateFormat('HH:mm').format(reminder.due!.toDate()),
                                     icon: Icons.watch_later_outlined,
-                                    textStyle: Theme.of(context).textTheme.labelMedium!
-                                        .copyWith(
-                                      color: Colors.red[300],
-                                    ),
+                                    textStyle: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                          color: Colors.red[300],
+                                        ),
                                   ),
                               ],
                             ),
@@ -148,24 +140,6 @@ class ReminderCard extends StatelessWidget {
       ),
     );
   }
-}
-
-Color chooseColor(int pri) {
-  late final Color ret;
-  switch (pri) {
-    case 0:
-      ret = const Color(0xFFb7b7b9); // NONE
-      break;
-    case 1:
-      ret = const Color(0xFF2a73e6); // LOW
-      break;
-    case 2:
-      ret = const Color(0xFFe69340); // MEDIUM
-      break;
-    case 3:
-      ret = const Color(0xFFd97c7d); // HIGH
-  }
-  return ret;
 }
 
 class IconText extends StatelessWidget {

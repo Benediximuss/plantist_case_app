@@ -76,7 +76,7 @@ class EditReminderController extends GetxController {
   void switchPage() {
     pageController.animateToPage(
       1 - _pageIndex.value,
-      duration: const Duration(milliseconds: 300), // Switching speed
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }

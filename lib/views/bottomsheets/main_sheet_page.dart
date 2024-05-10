@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/date_time_utils.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 
-class Sheet1 extends GetWidget<EditReminderController> {
-  const Sheet1({super.key});
+class MainSheetPage extends GetWidget<EditReminderController> {
+  const MainSheetPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/asset_manager.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 

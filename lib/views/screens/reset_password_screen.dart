@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
 import 'package:plantist_case_app/controllers/reset_password_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
@@ -59,11 +58,10 @@ class ResetPasswordScreen extends GetWidget<ResetPasswordController> {
                         decoration: InputDecoration(
                           hintText: 'E-mail',
                           hintStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                            color: ColorManager.gray,
-                          ),
+                                color: ColorManager.gray,
+                              ),
                           suffixIcon: Obx(() => controller.isEmailValid
-                              ? const Icon(
-                                  CupertinoIcons.checkmark_alt_circle_fill)
+                              ? const Icon(CupertinoIcons.checkmark_alt_circle_fill)
                               : const SizedBox.shrink()),
                           filled: true,
                         ),

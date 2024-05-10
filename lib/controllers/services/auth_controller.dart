@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/models/user_model.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
-import 'package:plantist_case_app/controllers/storage_controller.dart';
+import 'package:plantist_case_app/controllers/services/storage_controller.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';
 
 class AuthController extends GetxController {

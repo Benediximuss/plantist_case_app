@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/credentials_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
@@ -67,7 +66,6 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                         keyboardType: TextInputType.emailAddress,
                         style: Theme.of(context).textTheme.headlineMedium,
                         controller: controller.emailController,
-                        // focusNode: _usernameFocus,
                         decoration: InputDecoration(
                           hintText: 'E-mail',
                           hintStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(

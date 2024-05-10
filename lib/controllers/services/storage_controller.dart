@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/models/user_model.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';

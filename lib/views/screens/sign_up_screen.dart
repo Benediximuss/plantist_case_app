@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/views/screens/templates/credentials_page_template.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';

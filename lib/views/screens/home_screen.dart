@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
 import 'package:plantist_case_app/controllers/reminders_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
-import 'package:plantist_case_app/controllers/storage_controller.dart';
-import 'package:plantist_case_app/views/bottomsheet/edit_reminder_sheet.dart';
-import 'package:plantist_case_app/views/reminderlist/reminderlist2.dart';
+import 'package:plantist_case_app/controllers/services/storage_controller.dart';
+import 'package:plantist_case_app/views/bottomsheets/edit_reminder_sheet.dart';
+import 'package:plantist_case_app/views/listviews/reminder_list_view.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:plantist_case_app/widgets/elevated_icon.dart';
 
@@ -51,12 +51,12 @@ class HomeScreen extends GetWidget<RemindersController> {
                             const ElevatedIcon(
                               iconData: Icons.checklist_rounded,
                             ),
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                             Text(
                               'No reminders here!',
                               style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                                color: Colors.black54,
-                              ),
+                                    color: Colors.black54,
+                                  ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -64,7 +64,7 @@ class HomeScreen extends GetWidget<RemindersController> {
                       );
                     } else {
                       return Expanded(
-                        child: ReminderList2(
+                        child: ReminderListView(
                           reminderList: controller.reminders,
                           onEditAction: _showReminderSheet,
                           onDeleteAction: _deleteReminder,

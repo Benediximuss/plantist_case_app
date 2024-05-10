@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:plantist_case_app/controllers/auth_controller.dart';
-import 'package:plantist_case_app/controllers/storage_controller.dart';
+import 'package:plantist_case_app/controllers/services/auth_controller.dart';
+import 'package:plantist_case_app/controllers/services/storage_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 
 class RemindersController extends GetxController {
