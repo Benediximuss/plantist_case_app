@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
-import 'package:plantist_case_app/utils/colors.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 
 class Sheet1 extends GetWidget<EditReminderController> {
@@ -30,7 +30,7 @@ class Sheet1 extends GetWidget<EditReminderController> {
                 ),
                 focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: ColorConsts.gray,
+                    color: ColorManager.gray,
                     width: 1,
                   ),
                 ),
@@ -53,7 +53,7 @@ class Sheet1 extends GetWidget<EditReminderController> {
                 ),
                 focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
-                    color: ColorConsts.gray,
+                    color: ColorManager.gray,
                     width: 1,
                   ),
                 ),
@@ -65,7 +65,7 @@ class Sheet1 extends GetWidget<EditReminderController> {
               padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: ColorConsts.gray.withOpacity(0.5),
+                  color: ColorManager.gray.withOpacity(0.5),
                   strokeAlign: BorderSide.strokeAlignCenter,
                   width: 1,
                 ),
@@ -91,7 +91,7 @@ class Sheet1 extends GetWidget<EditReminderController> {
                   IconButton(
                     icon: const Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: ColorConsts.gray,
+                      color: ColorManager.gray,
                       size: 24,
                     ),
                     onPressed: () {

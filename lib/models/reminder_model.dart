@@ -19,9 +19,7 @@ class ReminderModel {
     this.timeInDue = false,
   });
 
-  factory ReminderModel.fromDocumentSnapshot(
-      /* QueryDocumentSnapshot<Object?> element, */
-      {required DocumentSnapshot documentSnapshot}) {
+  factory ReminderModel.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
     return ReminderModel(
       id: documentSnapshot.id,
       title: documentSnapshot['title'],
@@ -43,11 +41,4 @@ class ReminderModel {
       'timeInDue': timeInDue,
     };
   }
-}
-
-enum Priorities {
-  None,
-  Low,
-  Medium,
-  High,
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/screens/reminderlist/reminder_card.dart';
+import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:plantist_case_app/utils/date_utils.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';

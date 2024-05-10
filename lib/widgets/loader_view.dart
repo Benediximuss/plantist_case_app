@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantist_case_app/widgets/custom_progress_indicator.dart';
 
 class LoaderView extends StatelessWidget {
   final bool condition;
@@ -24,13 +25,12 @@ class LoaderView extends StatelessWidget {
             ),
           ),
         if (condition)
-          Center(
-            child: CircularProgressIndicator(
-              color: Colors.green[300],
-              backgroundColor: Colors.grey,
-            ),
+          const Center(
+            child: CustomProgressIndicator(),
           ),
       ],
     );
   }
 }
+
+

@@ -24,8 +24,6 @@ class CredentialsController extends GetxController {
     super.onInit();
   }
 
-  
-
   void validateEmail() {
     _isEmailValid.value = GetUtils.isEmail(emailController.text);
   }

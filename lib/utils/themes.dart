@@ -1,49 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:plantist_case_app/utils/colors.dart';
+// // ignore_for_file: prefer_const_constructors
 
-class ColorSchemes {
-  const ColorSchemes._();
+// import 'package:flutter/material.dart';
+// import 'package:plantist_case_app/utils/color_manager.dart';
 
-  static ColorScheme mainTheme() {
-    return const ColorScheme(
-      brightness: Brightness.light,
-      // Button tint / InputField Bottom Frame When Focussed
-      primary: Colors.black26,
+// class ColorSchemes {
+//   const ColorSchemes._();
 
-      onPrimary: Colors.blue,
-      secondary: Colors.amber,
-      onSecondary: Colors.green,
-      error: Colors.red,
-      onError: Colors.orange,
-
-      // InputField Bottom Frame When not Focussed
-      onBackground: ColorConsts.gray,
-
-      // Default text color / Icons color
-      onSurface: ColorConsts.indigo,
-      // onSurface: Color.fromRGBO(17, 26, 24, 1.0),
-
-      // AppBar Color / PopUp Background Color
-      surface: Colors.white,
-
-      // Background color
-      background: Colors.white,
-    );
-  }
-
-  // static ColorScheme mainTheme() {
-  //   return ColorScheme(
-  //     brightness: brightness,
-  //     primary: primary,
-  //     onPrimary: onPrimary,
-  //     secondary: secondary,
-  //     onSecondary: onSecondary,
-  //     error: error,
-  //     onError: onError,
-  //     background: background,
-  //     onBackground: onBackground,
-  //     surface: surface,
-  //     onSurface: onSurface,
-  //   );
-  // }
-}
+//   static ColorScheme mainTheme() {
+//     return ColorScheme(
+//       brightness: Brightness.light,
+//       primary: ColorManager.gray,
+//       onPrimary: ThemeData.light().colorScheme.onPrimary,
+//       secondary: ThemeData.light().colorScheme.secondary,
+//       onSecondary: ThemeData.light().colorScheme.onSecondary,
+//       error: ThemeData.light().colorScheme.error,
+//       onError: ThemeData.light().colorScheme.onError,
+//       background: Colors.white,
+//       onBackground: Colors.grey,
+//       surface: Colors.white,
+//       onSurface: ColorManager.indigo,
+//     );
+//   }
+// }

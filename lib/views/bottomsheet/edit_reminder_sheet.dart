@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/screens/bottomsheet/sheet1.dart';
-import 'package:plantist_case_app/screens/bottomsheet/sheet2.dart';
-import 'package:plantist_case_app/utils/colors.dart';
+import 'package:plantist_case_app/views/bottomsheet/sheet1.dart';
+import 'package:plantist_case_app/views/bottomsheet/sheet2.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
@@ -75,7 +75,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                                     controller.enableLoader();
                                     onPressedSubmit(
                                             reminder: controller
-                                                .getReminder(reminder))
+                                                .generateReminder(reminder))
                                         .then((_) => Get.back())
                                         .whenComplete(
                                             () => controller.disableLoader());
@@ -86,7 +86,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                               style: TextStyles.defaultTextBold().copyWith(
                                 color: controller.isReminderValid
                                     ? Colors.blue
-                                    : ColorConsts.gray,
+                                    : ColorManager.gray,
                               ),
                             ),
                           ),

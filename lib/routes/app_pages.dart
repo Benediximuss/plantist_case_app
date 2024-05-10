@@ -1,18 +1,20 @@
 import 'package:get/get.dart';
+import 'package:plantist_case_app/controllers/bindings/credentials_binding.dart';
 import 'package:plantist_case_app/controllers/bindings/reminders_binding.dart';
 import 'package:plantist_case_app/controllers/bindings/reset_password_binding.dart';
 import 'package:plantist_case_app/controllers/bindings/storage_binding.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
-import 'package:plantist_case_app/screens/home_screen.dart';
-import 'package:plantist_case_app/screens/reset_password_screen.dart';
-import 'package:plantist_case_app/screens/sign_in_screen.dart';
-import 'package:plantist_case_app/screens/sign_up_screen.dart';
-import 'package:plantist_case_app/controllers/bindings/credentials_binding.dart';
-import 'package:plantist_case_app/screens/splash_screen.dart';
-import 'package:plantist_case_app/screens/welcome_screen.dart';
+import 'package:plantist_case_app/views/screens/home_screen.dart';
+import 'package:plantist_case_app/views/screens/reset_password_screen.dart';
+import 'package:plantist_case_app/views/screens/sign_in_screen.dart';
+import 'package:plantist_case_app/views/screens/sign_up_screen.dart';
+import 'package:plantist_case_app/views/screens/splash_screen.dart';
+import 'package:plantist_case_app/views/screens/welcome_screen.dart';
 
 class AppPages {
-  static late final String initial;
+  const AppPages._();
+
+  static const String initial = AppRoutes.splashScreen;
 
   static final List<GetPage> pages = [
     GetPage(

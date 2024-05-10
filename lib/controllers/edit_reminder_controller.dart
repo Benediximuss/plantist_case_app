@@ -4,20 +4,42 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 
 class EditReminderController extends GetxController {
-  EditReminderController(this.reminder);
-
   final ReminderModel? reminder;
+
+  EditReminderController(this.reminder);
 
   final PageController pageController = PageController(initialPage: 0);
   final Rx<int> _pageIndex = Rx<int>(0);
 
-  final GlobalKey<PopupMenuButtonState> popupMenuCtrl =
-      GlobalKey<PopupMenuButtonState>();
+  final GlobalKey<PopupMenuButtonState> popUpMenuController = GlobalKey<PopupMenuButtonState>();
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
+  final Rx<int> _priority = Rx<int>(0);
+  final Rx<bool> _dateSwitch = Rx<bool>(false);
+  final Rx<bool> _timeSwitch = Rx<bool>(false);
   final Rx<DateTime> _selectedDate = Rx<DateTime>(DateTime.now());
+  final Rx<TimeOfDay> _selectedTime = Rx<TimeOfDay>(TimeOfDay.now());
+
+  final Rx<bool> _isReminderValid = Rx<bool>(false);
+  final Rx<bool> _isLoading = Rx<bool>(false);
+
+  int get priority => _priority.value;
+  DateTime get selectedDate => _selectedDate.value;
+  TimeOfDay get selectedTime => _selectedTime.value;
+  bool get dateSwitch => _dateSwitch.value;
+  bool get timeSwitch => _timeSwitch.value;
+  bool get isReminderValid => _isReminderValid.value;
+  bool get isLoading => _isLoading.value;
+  int get pageIndex => _pageIndex.value;
+
+  set priority(int value) => _priority.value = value;
+  set selectedDate(DateTime value) => _selectedDate.value = value;
+  set selectedTime(TimeOfDay value) => _selectedTime.value = value;
+  set dateSwitch(bool value) => _dateSwitch.value = value;
+  set timeSwitch(bool value) => _timeSwitch.value = value;
+  set pageIndex(int value) => _pageIndex.value = value;
 
   final priorityList = [
     {'label': 'None', 'value': 0},
@@ -26,41 +48,13 @@ class EditReminderController extends GetxController {
     {'label': 'High', 'value': 3},
   ];
 
-  DateTime get selectedDate => _selectedDate.value;
-  set selectedDate(DateTime value) => _selectedDate.value = value;
-
-  final Rx<TimeOfDay> _selectedTime = Rx<TimeOfDay>(TimeOfDay.now());
-
-  TimeOfDay get selectedTime => _selectedTime.value;
-  set selectedTime(TimeOfDay value) => _selectedTime.value = value;
-
-  final Rx<bool> _isReminderValid = Rx<bool>(false);
-  final Rx<bool> _dateSwitch = Rx<bool>(false);
-  final Rx<bool> _timeSwitch = Rx<bool>(false);
-  final Rx<int> _priority = Rx<int>(0);
-
-  bool get isReminderValid => _isReminderValid.value;
-  bool get dateSwitch => _dateSwitch.value;
-  bool get timeSwitch => _timeSwitch.value;
-  int get priority => _priority.value;
-  int get pageIndex => _pageIndex.value;
-
-  set dateSwitch(bool value) => _dateSwitch.value = value;
-  set timeSwitch(bool value) => _timeSwitch.value = value;
-  set priority(int value) => _priority.value = value;
-  set pageIndex(int value) => _pageIndex.value = value;
-
-  final Rx<bool> _isLoading = Rx<bool>(false);
-  bool get isLoading => _isLoading.value;
-
   @override
   void onInit() {
-    if (reminder != null) initReminderValues(reminder!);
-
+    if (reminder != null) _initReminderValues(reminder!);
     super.onInit();
   }
 
-  void initReminderValues(ReminderModel reminder) {
+  void _initReminderValues(ReminderModel reminder) {
     titleController.text = reminder.title;
     noteController.text = reminder.note ?? '';
     if (reminder.due != null) {
@@ -72,7 +66,6 @@ class EditReminderController extends GetxController {
       }
     }
     _priority.value = reminder.priority;
-    // _reminderID = reminder.id;
     validateTitle();
   }
 
@@ -96,7 +89,7 @@ class EditReminderController extends GetxController {
     _isLoading.value = false;
   }
 
-  ReminderModel getReminder(ReminderModel? reminder) {
+  ReminderModel generateReminder(ReminderModel? reminder) {
     if (dateSwitch && timeSwitch) {
       _selectedDate.value = DateTime(
         _selectedDate.value.year,
@@ -112,9 +105,7 @@ class EditReminderController extends GetxController {
       title: titleController.text.trim(),
       priority: priority,
       completed: reminder?.completed ?? false,
-      note: noteController.text.trim().isNotEmpty
-          ? noteController.text.trim()
-          : null,
+      note: noteController.text.trim().isNotEmpty ? noteController.text.trim() : null,
       due: dateSwitch ? Timestamp.fromDate(selectedDate) : null,
       timeInDue: dateSwitch && timeSwitch,
     );

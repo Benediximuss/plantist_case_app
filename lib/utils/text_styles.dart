@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plantist_case_app/utils/colors.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 
 // @immutable
 // class CustomTextTheme {
@@ -35,7 +35,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: ColorConsts.indigo,
+      color: ColorManager.indigo,
     );
   }
 
@@ -44,7 +44,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 15,
       fontWeight: FontWeight.w400,
-      color: ColorConsts.gray,
+      color: ColorManager.gray,
     );
   }
 
@@ -53,7 +53,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 15,
       fontWeight: FontWeight.bold,
-      color: ColorConsts.indigo,
+      color: ColorManager.indigo,
     );
   }
 
@@ -62,7 +62,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 35,
       fontWeight: FontWeight.w500,
-      color: ColorConsts.indigo,
+      color: ColorManager.indigo,
     );
   }
 
@@ -71,7 +71,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 40,
       fontWeight: FontWeight.w300,
-      color: ColorConsts.black,
+      color: ColorManager.black,
     );
   }
 
@@ -80,7 +80,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 40,
       fontWeight: FontWeight.bold,
-      color: ColorConsts.black,
+      color: ColorManager.black,
     );
   }
 
@@ -89,7 +89,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 15,
       fontWeight: FontWeight.w500,
-      color: ColorConsts.gray,
+      color: ColorManager.gray,
     );
   }
 
@@ -98,7 +98,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 17,
       fontWeight: FontWeight.w700,
-      color: ColorConsts.gray,
+      color: ColorManager.gray,
     );
   }
 
@@ -124,7 +124,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 17,
       fontWeight: FontWeight.w500,
-      color: ColorConsts.black,
+      color: ColorManager.black,
     );
   }
 
@@ -133,7 +133,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 17,
       fontWeight: FontWeight.w600,
-      color: ColorConsts.black,
+      color: ColorManager.black,
     );
   }
 
@@ -142,7 +142,7 @@ class TextStyles {
       _fontFamily,
       fontSize: 17,
       fontWeight: FontWeight.w500,
-      color: ColorConsts.gray,
+      color: ColorManager.gray,
     );
   }
 
@@ -151,11 +151,11 @@ class TextStyles {
       _fontFamily,
       fontSize: 17,
       fontWeight: FontWeight.w400,
-      color: ColorConsts.gray,
+      color: ColorManager.gray,
     );
   }
 
-  static TextStyle slidemenuText() {
+  static TextStyle slideMenuText() {
     return GoogleFonts.getFont(
       _fontFamily,
       fontSize: 17,

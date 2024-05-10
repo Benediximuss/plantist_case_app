@@ -5,8 +5,8 @@ import 'package:plantist_case_app/controllers/reminders_controller.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/controllers/storage_controller.dart';
-import 'package:plantist_case_app/screens/bottomsheet/edit_reminder_sheet.dart';
-import 'package:plantist_case_app/screens/reminderlist/reminderlist2.dart';
+import 'package:plantist_case_app/views/bottomsheet/edit_reminder_sheet.dart';
+import 'package:plantist_case_app/views/reminderlist/reminderlist2.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:plantist_case_app/widgets/elevated_icon.dart';
@@ -22,7 +22,6 @@ class HomeScreen extends GetWidget<RemindersController> {
           child: Stack(
             children: [
               Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),

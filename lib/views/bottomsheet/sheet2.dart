@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
-import 'package:plantist_case_app/utils/colors.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
-import 'package:plantist_case_app/screens/reminderlist/reminder_card.dart';
+import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
 
 class Sheet2 extends GetWidget<EditReminderController> {
   const Sheet2({super.key});
@@ -20,8 +20,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
           children: [
             const SizedBox(height: 16),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
               child: Column(
                 children: [
                   Row(
@@ -41,8 +40,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                           Obx(
                             () => controller.dateSwitch
                                 ? Text(
-                                    DateFormat('dd.MM.yyyy')
-                                        .format(controller.selectedDate),
+                                    DateFormat('dd.MM.yyyy').format(controller.selectedDate),
                                     style: TextStyles.defaultTextSecondary(),
                                   )
                                 : Container(),
@@ -65,12 +63,9 @@ class Sheet2 extends GetWidget<EditReminderController> {
                             height: 200,
                             child: CalendarDatePicker(
                               initialDate: controller.selectedDate,
-                              firstDate: controller.selectedDate
-                                  .subtract(const Duration(days: 365 * 10)),
-                              lastDate: controller.selectedDate
-                                  .add(const Duration(days: 365 * 10)),
-                              onDateChanged: (date) =>
-                                  controller.selectedDate = date,
+                              firstDate: controller.selectedDate.subtract(const Duration(days: 365 * 10)),
+                              lastDate: controller.selectedDate.add(const Duration(days: 365 * 10)),
+                              onDateChanged: (date) => controller.selectedDate = date,
                             ),
                           )
                         : Container(),
@@ -84,13 +79,11 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                 children: [
                                   Icon(
                                     CupertinoIcons.time,
-                                    size: TextStyles.defaultText().fontSize! *
-                                        1.5,
+                                    size: TextStyles.defaultText().fontSize! * 1.5,
                                   ),
                                   const SizedBox(width: 10),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Time',
@@ -100,8 +93,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                         () => controller.timeSwitch
                                             ? Text(
                                                 '${controller.selectedTime.hour.toString().padLeft(2, '0')}:${controller.selectedTime.minute.toString().padLeft(2, '0')}',
-                                                style: TextStyles
-                                                    .defaultTextSecondary(),
+                                                style: TextStyles.defaultTextSecondary(),
                                               )
                                             : Container(),
                                       ),
@@ -117,22 +109,15 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                         if (value) {
                                           showTimePicker(
                                             context: context,
-                                            initialTime:
-                                                controller.selectedTime,
-                                            initialEntryMode:
-                                                TimePickerEntryMode.inputOnly,
-                                            builder: (BuildContext context,
-                                                Widget? child) {
+                                            initialTime: controller.selectedTime,
+                                            initialEntryMode: TimePickerEntryMode.inputOnly,
+                                            builder: (BuildContext context, Widget? child) {
                                               return MediaQuery(
-                                                data: MediaQuery.of(context)
-                                                    .copyWith(
-                                                        alwaysUse24HourFormat:
-                                                            true),
+                                                data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
                                                 child: child!,
                                               );
                                             },
-                                          ).then((value) =>
-                                              controller.selectedTime = value!);
+                                          ).then((value) => controller.selectedTime = value!);
                                         }
                                       },
                                       activeColor: Colors.green[400],
@@ -152,7 +137,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
               padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: ColorConsts.gray.withOpacity(0.5),
+                  color: ColorManager.gray.withOpacity(0.5),
                   strokeAlign: BorderSide.strokeAlignCenter,
                   width: 1,
                 ),
@@ -174,60 +159,59 @@ class Sheet2 extends GetWidget<EditReminderController> {
                     children: [
                       Obx(
                         () => Text(
-                          controller.priorityList[controller.priority]['label']
-                              as String,
+                          controller.priorityList[controller.priority]['label'] as String,
                           style: TextStyles.defaultTextSecondary(),
                         ),
                       ),
                       PopupMenuButton<int>(
-                        key: controller.popupMenuCtrl,
-                        child: IconButton(
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: ColorConsts.gray,
-                            size: 24,
-                          ),
-                          onPressed: () {
-                            controller.popupMenuCtrl.currentState
-                                ?.showButtonMenu();
-                          },
-                        ),
+                        key: controller.popUpMenuController,
                         onSelected: (value) => controller.priority = value,
+                        color: Colors.white,
                         itemBuilder: (context) => controller.priorityList
                             .map(
                               (item) => PopupMenuItem<int>(
                                 value: item['value'] as int,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(0.5),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color:
-                                            chooseColor(item['value'] as int),
+                                child: Container(
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.all(0.5),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: chooseColor(item['value'] as int),
+                                        ),
+                                        child: Icon(
+                                          CupertinoIcons.circle_filled,
+                                          color: Colors.white.withOpacity(0.9),
+                                          size: 25,
+                                        ),
                                       ),
-                                      child: Icon(
-                                        CupertinoIcons.circle_filled,
-                                        color: Colors.white.withOpacity(0.9),
-                                        size: 25,
+                                      const SizedBox(width: 10),
+                                      Text(
+                                        item['label'] as String,
+                                        style: TextStyles.defaultText(),
                                       ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      item['label'] as String,
-                                      style: TextStyles.defaultText(),
-                                    ),
-                                    Expanded(child: Container()),
-                                    if (item['value'] as int ==
-                                        controller.priority)
-                                      const Icon(
-                                        CupertinoIcons.check_mark,
-                                      )
-                                  ],
+                                      Expanded(child: Container()),
+                                      if (item['value'] as int == controller.priority)
+                                        const Icon(
+                                          CupertinoIcons.check_mark,
+                                        )
+                                    ],
+                                  ),
                                 ),
                               ),
                             )
                             .toList(),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: ColorManager.gray,
+                            size: 24,
+                          ),
+                          onPressed: () {
+                            controller.popUpMenuController.currentState?.showButtonMenu();
+                          },
+                        ),
                       ),
                     ],
                   ),

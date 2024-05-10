@@ -9,8 +9,7 @@ class UserModel {
     required this.email,
   });
 
-  factory UserModel.fromDocumentSnapshot(
-      {required DocumentSnapshot documentSnapshot}) {
+  factory UserModel.fromDocumentSnapshot({required DocumentSnapshot documentSnapshot}) {
     return UserModel(
       id: documentSnapshot.id,
       email: documentSnapshot["email"],

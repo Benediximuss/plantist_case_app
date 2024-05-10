@@ -5,6 +5,6 @@ final class AppRoutes {
   static const welcomeScreen = '/welcome';
   static const signUpScreen = '/signUp';
   static const signInScreen = '/signIn';
-  static const resetPasswordScreen = '/reset';
+  static const resetPasswordScreen = '/resetPassword';
   static const homeScreen = '/home';
 }
