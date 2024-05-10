@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/utils/asset_manager.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
@@ -36,12 +37,12 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Text(
                 'Welcome back to',
-                style: TextStyles.titleTextSlender(),
+                style: Theme.of(context).textTheme.displayLarge,
                 textAlign: TextAlign.center,
               ),
               Text(
                 'Plantist',
-                style: TextStyles.titleTextBig(),
+                style: Theme.of(context).textTheme.headlineLarge,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -49,7 +50,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               Text(
                 'Start your productive life now!',
-                style: TextStyles.smallText(),
+                style: Theme.of(context).textTheme.bodySmall,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -75,7 +76,7 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Don\'t you have an account?',
-                    style: TextStyles.captionText(),
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                   const SizedBox(
                     width: 5,
@@ -84,7 +85,10 @@ class WelcomeScreen extends StatelessWidget {
                     onTap: () => _onSignUpPressed(),
                     child: Text(
                       'Sign Up',
-                      style: TextStyles.captionTextHighlighted(),
+                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: ColorManager.indigo,
+                          ),
                     ),
                   ),
                 ],

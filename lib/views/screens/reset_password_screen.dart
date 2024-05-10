@@ -4,8 +4,9 @@ import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/auth_controller.dart';
 import 'package:plantist_case_app/controllers/reset_password_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/utils/notification_utils.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
@@ -42,22 +43,24 @@ class ResetPasswordScreen extends GetWidget<ResetPasswordController> {
                     children: [
                       Text(
                         'Reset password',
-                        style: TextStyles.titleText(),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 10),
                       Text(
                         'Enter you email to send a password reset email',
-                        style: TextStyles.smallText(),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyles.inputText(),
+                        style: Theme.of(context).textTheme.headlineMedium,
                         controller: controller.emailController,
                         // focusNode: _usernameFocus,
                         decoration: InputDecoration(
                           hintText: 'E-mail',
-                          hintStyle: TextStyles.placeHolderText(),
+                          hintStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            color: ColorManager.gray,
+                          ),
                           suffixIcon: Obx(() => controller.isEmailValid
                               ? const Icon(
                                   CupertinoIcons.checkmark_alt_circle_fill)

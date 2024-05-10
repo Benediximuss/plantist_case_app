@@ -7,7 +7,6 @@ import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/controllers/storage_controller.dart';
 import 'package:plantist_case_app/views/bottomsheet/edit_reminder_sheet.dart';
 import 'package:plantist_case_app/views/reminderlist/reminderlist2.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
 import 'package:plantist_case_app/widgets/custom_icon_button.dart';
 import 'package:plantist_case_app/widgets/elevated_icon.dart';
 
@@ -30,13 +29,13 @@ class HomeScreen extends GetWidget<RemindersController> {
                       children: [
                         Text(
                           'Plantist',
-                          style: TextStyles.titleTextBig(),
+                          style: Theme.of(context).textTheme.headlineLarge,
                         ),
                         IconButton(
                           icon: Icon(
                             Icons.logout_rounded,
                             weight: 0.1,
-                            size: TextStyles.titleTextBig().fontSize!,
+                            size: Theme.of(context).textTheme.headlineLarge!.fontSize,
                           ),
                           onPressed: () => _onLogOutPressed(),
                         ),
@@ -55,7 +54,7 @@ class HomeScreen extends GetWidget<RemindersController> {
                             SizedBox(height: 30),
                             Text(
                               'No reminders here!',
-                              style: TextStyles.buttonText().copyWith(
+                              style: Theme.of(context).textTheme.displayMedium!.copyWith(
                                 color: Colors.black54,
                               ),
                               textAlign: TextAlign.center,

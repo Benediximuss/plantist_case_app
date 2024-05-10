@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 
 class NotificationUtils {
   const NotificationUtils._();
@@ -12,14 +12,14 @@ class NotificationUtils {
       titleText: Text(
         title,
         textAlign: TextAlign.center,
-        style: TextStyles.inputText().copyWith(
+        style: Get.context!.textTheme.headlineMedium!.copyWith(
           color: Colors.black87,
         ),
       ),
       messageText: Text(
         message,
         textAlign: TextAlign.center,
-        style: TextStyles.smallText().copyWith(
+        style: Get.context!.textTheme.bodySmall!.copyWith(
           color: Colors.black54,
         ),
       ),

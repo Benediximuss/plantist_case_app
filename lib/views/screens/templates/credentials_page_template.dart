@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/credentials_controller.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/dynamic_button.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
@@ -54,26 +55,25 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                     children: [
                       Text(
                         '$title with email',
-                        style: TextStyles.titleText(),
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 10),
                       Text(
                         'Enter you email and password',
-                        style: TextStyles.smallText(),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyles.inputText(),
+                        style: Theme.of(context).textTheme.headlineMedium,
                         controller: controller.emailController,
                         // focusNode: _usernameFocus,
                         decoration: InputDecoration(
                           hintText: 'E-mail',
-                          hintStyle: TextStyles.placeHolderText(),
-                          suffixIcon: Obx(() => controller.isEmailValid
-                              ? const Icon(
-                                  CupertinoIcons.checkmark_alt_circle_fill)
-                              : const SizedBox.shrink()),
+                          hintStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: ColorManager.gray,
+                              ),
+                          suffixIcon: Obx(() => controller.isEmailValid ? const Icon(CupertinoIcons.checkmark_alt_circle_fill) : const SizedBox.shrink()),
                           filled: true,
                         ),
                         onChanged: (value) => controller.validateEmail(),
@@ -84,26 +84,27 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                           return Obx(
                             () => TextFormField(
                               keyboardType: TextInputType.visiblePassword,
-                              style: TextStyles.inputText(),
+                              style: Theme.of(context).textTheme.headlineMedium,
                               controller: controller.passwordController,
                               obscureText: controller.isPasswordHidden,
                               decoration: InputDecoration(
-                                // counterText: 'Forgot password?',
-                                // counterStyle: TextStyles.linkText(),
                                 counter: TextButton(
                                   onPressed: () => Get.toNamed(AppRoutes.resetPasswordScreen),
                                   child: Text(
                                     'Forgot password?',
-                                    style: TextStyles.linkText(),
+                                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.blue,
+                                        ),
                                   ),
                                 ),
                                 hintText: 'Password',
-                                hintStyle: TextStyles.placeHolderText(),
+                                hintStyle: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                      color: ColorManager.gray,
+                                    ),
                                 suffixIcon: IconButton(
                                   icon: Icon(
-                                    controller.isPasswordHidden
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
+                                    controller.isPasswordHidden ? Icons.visibility_off : Icons.visibility,
                                   ),
                                   onPressed: () {
                                     controller.togglePasswordVisibility();
@@ -111,8 +112,7 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                                 ),
                                 filled: true,
                               ),
-                              onChanged: (value) =>
-                                  controller.validatePassword(),
+                              onChanged: (value) => controller.validatePassword(),
                             ),
                           );
                         },
@@ -124,8 +124,7 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
                             child: Obx(
                               () => DynamicButton(
                                 text: buttonText,
-                                enabled: controller.isEmailValid &&
-                                    controller.isPasswordValid,
+                                enabled: controller.isEmailValid && controller.isPasswordValid,
                                 onPressed: () {
                                   FocusScope.of(context).unfocus();
                                   _onSubmitLogic();
@@ -153,8 +152,6 @@ class CredentialsPageTemplate extends GetWidget<CredentialsController> {
     onPressedSubmit(
       email: controller.emailController.text,
       password: controller.passwordController.text,
-    )
-        .then((_) => onSuccessful())
-        .whenComplete(() => controller.disableLoader());
+    ).then((_) => onSuccessful()).whenComplete(() => controller.disableLoader());
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 
 class ReminderCard extends StatelessWidget {
   final ReminderModel reminder;
@@ -87,12 +87,12 @@ class ReminderCard extends StatelessWidget {
                               child: Text(
                                 reminder.title,
                                 style: reminder.completed
-                                    ? TextStyles.defaultText().copyWith(
+                                    ? Theme.of(context).textTheme.bodyMedium!.copyWith(
                                         decoration: TextDecoration.lineThrough,
                                         decorationColor: Colors.grey[800],
                                         decorationThickness: 1.7,
                                       )
-                                    : TextStyles.defaultText(),
+                                    : Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
                           ),
@@ -104,7 +104,7 @@ class ReminderCard extends StatelessWidget {
                               child: SingleChildScrollView(
                                 child: Text(
                                   reminder.note!,
-                                  style: TextStyles.defaultTextSecondary(),
+                                  style: Theme.of(context).textTheme.labelMedium,
                                 ),
                               ),
                             ),
@@ -116,7 +116,7 @@ class ReminderCard extends StatelessWidget {
                                   text: DateFormat('dd.MM.yyyy')
                                       .format(reminder.due!.toDate()),
                                   icon: CupertinoIcons.calendar,
-                                  textStyle: TextStyles.defaultTextSecondary(),
+                                  textStyle: Theme.of(context).textTheme!.labelMedium!,
                                 ),
                                 const SizedBox(width: 15),
                                 if (reminder.timeInDue)
@@ -124,7 +124,7 @@ class ReminderCard extends StatelessWidget {
                                     text: DateFormat('HH:mm')
                                         .format(reminder.due!.toDate()),
                                     icon: Icons.watch_later_outlined,
-                                    textStyle: TextStyles.defaultTextSecondary()
+                                    textStyle: Theme.of(context).textTheme.labelMedium!
                                         .copyWith(
                                       color: Colors.red[300],
                                     ),

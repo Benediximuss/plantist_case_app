@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
+import 'package:plantist_case_app/utils/color_manager.dart';
 import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:plantist_case_app/utils/date_utils.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/utils/date_time_utils.dart';
 
 class ReminderList2 extends StatelessWidget {
   final List<ReminderModel> reminderList;
@@ -68,9 +68,7 @@ class ReminderList2 extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 30, 15, 0),
             child: Text(
               value != null ? DateTimeUtils.getDayTitle(value) : 'No date',
-              style: TextStyles.defaultTextSecondary().copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
         ),

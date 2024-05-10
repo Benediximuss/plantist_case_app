@@ -5,7 +5,7 @@ import 'package:plantist_case_app/models/reminder_model.dart';
 import 'package:plantist_case_app/views/bottomsheet/sheet1.dart';
 import 'package:plantist_case_app/views/bottomsheet/sheet2.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/widgets/loader_view.dart';
 
 class EditReminderSheet extends GetWidget<EditReminderController> {
@@ -50,7 +50,7 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                           TextButton(
                             child: Text(
                               controller.pageIndex == 0 ? 'Cancel' : 'Back',
-                              style: TextStyles.defaultText().copyWith(
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Colors.blue,
                               ),
                             ),
@@ -65,7 +65,9 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                             controller.pageIndex == 0
                                 ? 'New Reminder'
                                 : 'Details',
-                            style: TextStyles.defaultTextBold(),
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           Expanded(child: Container()),
                           TextButton(
@@ -83,7 +85,8 @@ class EditReminderSheet extends GetWidget<EditReminderController> {
                                 : null,
                             child: Text(
                               reminder != null ? 'Update' : 'Add',
-                              style: TextStyles.defaultTextBold().copyWith(
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w700,
                                 color: controller.isReminderValid
                                     ? Colors.blue
                                     : ColorManager.gray,

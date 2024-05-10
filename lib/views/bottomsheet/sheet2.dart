@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 import 'package:plantist_case_app/views/reminderlist/reminder_card.dart';
 
 class Sheet2 extends GetWidget<EditReminderController> {
@@ -27,7 +27,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                     children: [
                       Icon(
                         CupertinoIcons.calendar,
-                        size: TextStyles.defaultText().fontSize! * 1.5,
+                        size: Theme.of(context).textTheme.bodyMedium!.fontSize! * 1.5,
                       ),
                       const SizedBox(width: 10),
                       Column(
@@ -35,13 +35,13 @@ class Sheet2 extends GetWidget<EditReminderController> {
                         children: [
                           Text(
                             'Date',
-                            style: TextStyles.defaultText(),
+                            style: Theme.of(context).textTheme.bodyMedium,
                           ),
                           Obx(
                             () => controller.dateSwitch
                                 ? Text(
                                     DateFormat('dd.MM.yyyy').format(controller.selectedDate),
-                                    style: TextStyles.defaultTextSecondary(),
+                                    style: Theme.of(context).textTheme.labelMedium,
                                   )
                                 : Container(),
                           ),
@@ -79,7 +79,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                 children: [
                                   Icon(
                                     CupertinoIcons.time,
-                                    size: TextStyles.defaultText().fontSize! * 1.5,
+                                    size: Theme.of(context).textTheme.bodyMedium!.fontSize! * 1.5,
                                   ),
                                   const SizedBox(width: 10),
                                   Column(
@@ -87,13 +87,13 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                     children: [
                                       Text(
                                         'Time',
-                                        style: TextStyles.defaultText(),
+                                        style: Theme.of(context).textTheme.bodyMedium,
                                       ),
                                       Obx(
                                         () => controller.timeSwitch
                                             ? Text(
                                                 '${controller.selectedTime.hour.toString().padLeft(2, '0')}:${controller.selectedTime.minute.toString().padLeft(2, '0')}',
-                                                style: TextStyles.defaultTextSecondary(),
+                                                style: Theme.of(context).textTheme.labelMedium,
                                               )
                                             : Container(),
                                       ),
@@ -151,7 +151,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                     children: [
                       Text(
                         'Priority',
-                        style: TextStyles.defaultText(),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ],
                   ),
@@ -160,7 +160,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                       Obx(
                         () => Text(
                           controller.priorityList[controller.priority]['label'] as String,
-                          style: TextStyles.defaultTextSecondary(),
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
                       PopupMenuButton<int>(
@@ -189,7 +189,7 @@ class Sheet2 extends GetWidget<EditReminderController> {
                                       const SizedBox(width: 10),
                                       Text(
                                         item['label'] as String,
-                                        style: TextStyles.defaultText(),
+                                        style: Theme.of(context).textTheme.bodyMedium,
                                       ),
                                       Expanded(child: Container()),
                                       if (item['value'] as int == controller.priority)

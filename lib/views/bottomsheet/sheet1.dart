@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/edit_reminder_controller.dart';
 import 'package:plantist_case_app/utils/color_manager.dart';
-import 'package:plantist_case_app/utils/text_styles.dart';
+import 'package:plantist_case_app/utils/date_time_utils.dart';
+import 'package:plantist_case_app/temp/text_styles.dart';
 
 class Sheet1 extends GetWidget<EditReminderController> {
   const Sheet1({super.key});
@@ -17,11 +18,13 @@ class Sheet1 extends GetWidget<EditReminderController> {
           children: [
             TextField(
               controller: controller.titleController,
-              style: TextStyles.defaultText(),
+              style: Theme.of(context).textTheme.bodyMedium,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 hintText: 'Title',
-                hintStyle: TextStyles.defaultTextPlaceholder(),
+                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: ColorManager.gray,
+                    ),
                 filled: true,
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -40,11 +43,13 @@ class Sheet1 extends GetWidget<EditReminderController> {
             const SizedBox(height: 16),
             TextField(
               controller: controller.noteController,
-              style: TextStyles.defaultText(),
+              style: Theme.of(context).textTheme.bodyMedium,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 hintText: 'Notes',
-                hintStyle: TextStyles.defaultTextPlaceholder(),
+                hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: ColorManager.gray,
+                    ),
                 filled: true,
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -79,12 +84,15 @@ class Sheet1 extends GetWidget<EditReminderController> {
                     children: [
                       Text(
                         'Details',
-                        style: TextStyles.defaultText(),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      Text(
-                        'Today',
-                        style: TextStyles.defaultTextSecondary()
-                            .copyWith(fontSize: 15),
+                      Obx(
+                        () => controller.dateSwitch
+                            ? Text(
+                                DateTimeUtils.getDayTitle(DateTimeUtils.dateToDay(controller.selectedDate)),
+                                style: Theme.of(context).textTheme.labelMedium,
+                              )
+                            : Container(),
                       ),
                     ],
                   ),
