@@ -26,10 +26,7 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<void> signUp({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signUp({required String email, required String password}) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -61,10 +58,7 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> signIn({required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
@@ -90,7 +84,6 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
-      // Get.find<UserController>().clear();
     } on FirebaseAuthException catch (e) {
       NotificationUtils.showCustomSnackbar(
         title: "Error signing out",
@@ -99,6 +92,26 @@ class AuthController extends GetxController {
     } catch (e) {
       NotificationUtils.showCustomSnackbar(
         title: "Error signing out",
+        message: "An error occurred, please try again",
+      );
+
+      print(e.toString());
+      rethrow;
+    }
+  }
+
+  Future<void> resetPassword({required String email}) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error sending password reset email",
+        message: e.message.toString(),
+      );
+      rethrow;
+    } catch (e) {
+      NotificationUtils.showCustomSnackbar(
+        title: "Error sending password reset email",
         message: "An error occurred, please try again",
       );
 

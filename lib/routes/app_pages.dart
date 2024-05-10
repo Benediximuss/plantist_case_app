@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:plantist_case_app/controllers/bindings/reminders_binding.dart';
+import 'package:plantist_case_app/controllers/bindings/reset_password_binding.dart';
 import 'package:plantist_case_app/controllers/bindings/storage_binding.dart';
 import 'package:plantist_case_app/routes/app_routes.dart';
 import 'package:plantist_case_app/screens/home_screen.dart';
+import 'package:plantist_case_app/screens/reset_password_screen.dart';
 import 'package:plantist_case_app/screens/sign_in_screen.dart';
 import 'package:plantist_case_app/screens/sign_up_screen.dart';
 import 'package:plantist_case_app/controllers/bindings/credentials_binding.dart';
@@ -27,6 +29,13 @@ class AppPages {
       bindings: [
         CredentialsBinding(),
         StorageBinding(),
+      ],
+    ),
+    GetPage(
+      name: AppRoutes.resetPasswordScreen,
+      page: () => const ResetPasswordScreen(),
+      bindings: [
+        ResetPasswordBinding(),
       ],
     ),
     GetPage(

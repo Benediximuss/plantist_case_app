@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:plantist_case_app/models/reminder_model.dart';
-import 'package:plantist_case_app/utils/colors.dart';
 import 'package:plantist_case_app/utils/text_styles.dart';
 
 class ReminderCard extends StatelessWidget {
