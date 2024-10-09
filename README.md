@@ -1,7 +1,5 @@
 # plantist_case_app
 
-A case study for Codeway Jr. Flutter Developer role
-
 Created by Uğur Öztunç
 
 ### Implemented Features
